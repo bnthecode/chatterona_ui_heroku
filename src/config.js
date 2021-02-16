@@ -11,11 +11,10 @@ const randomKey = Math.floor(Math.random() * 800).toString();
 const config = {
     environment: process.env.NODE_ENV,
     devUser: {
-        uid: randomKey,
         photoURL: animals[Math.floor(Math.random() * 6)],
-        displayName:`Chatterona Bot_${randomKey}`, 
+        username:`Dev_User`, 
     },
-    node_api_base_url: "http://localhost:8080/api",
+    node_api_base_url: "http://localhost:3003/api",
 
 }
 export default config;

@@ -1,34 +1,29 @@
-import db from "../firebase";
 import http from "./http-configuration";
 
-const channelService = {
+const channelsHttp = {
   // endpoints to node
-  getChannels: async (serverId) =>
-    await http.get(`/servers/${serverId}/channels`),
-  createChannel: async (serverId, channel) =>
-    await http.post(`/servers/${serverId}/channels`, { channel }),
 
-  // events from firebase
-  registerChannelsListener: (serverId, callback, cacheCallback) => {
-    db.collection(`servers`)
-      .doc(serverId)
-      .collection("channels")
-      .orderBy("timestamp", "asc")
-      .onSnapshot((snapshot) => {
-        const channels = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-        callback(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        cacheCallback(channels);
-      });
+  createChannel: async (serverId, channel) => {
+    const { data } = await http.post(`/channels/${serverId}/channels`, {
+      channel,
+    });
+    return data;
   },
-  registerChannelListener: (serverId, channelId, callback) => {
-    db.collection(`servers`)
-      .doc(serverId)
-      .collection("channels")
-      .doc(channelId)
-      .onSnapshot((doc) => {
-        callback({ id: doc.id, ...doc.data() });
-      });
+  getChannelMessages: async (channelId, page, limit) => {
+    const { data } = await http.get(`/channels/${channelId}/messages?page=${page}&limit=${limit}`);
+    return data;
+  },
+
+  createChannelMessage: async (channelId, message, isPreviousAuthor) => {
+    const { data } = await http.post(`/channels/${channelId}/messages`, {
+      message,
+      isPreviousAuthor
+    });
+    return data;
+  },
+  setTyping: async (channelId) => {
+     await http.post(`/channels/${channelId}/typing`)
   },
 };
 
-export default channelService;
+export default channelsHttp;

@@ -1,3 +1,3 @@
-export const logInUserRedux = (dispatch) => (user) => {
-    dispatch({ type: 'LOG_USER_IN', payload: user})
+export const setAuthUserRedux = (dispatch) => (user) => {
+    dispatch({ type: 'SET_AUTH_USER', payload: user})
 }

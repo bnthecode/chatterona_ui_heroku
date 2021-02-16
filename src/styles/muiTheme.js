@@ -1,5 +1,4 @@
 import { createMuiTheme } from "@material-ui/core";
-
 const theme = createMuiTheme({
   palette: {
 
@@ -18,6 +17,7 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: [
       '-apple-system',
+      'Open Sane',
       'BlinkMacSystemFont',
       '"Segoe UI"',
       'Roboto',
@@ -31,6 +31,13 @@ const theme = createMuiTheme({
     ].join(','),
   },
   overrides: {
+
+      MuiCssBaseline: {
+        '@global': {
+          '@font-face': "Open Sans",
+        },
+      },
+
       MuiTooltip: {
         tooltip: {
           fontSize: 12,
