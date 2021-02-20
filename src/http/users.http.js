@@ -19,6 +19,21 @@ const usersHttp = {
     const { data } = await http.put(`/users/logout`);
     return data;
   },
+
+  getUserFriends: async () => {
+    const { data } = await http.get(`/users/friends`);
+    return data;
+  },
+
+  subscribeToNotifications: async (subscription) => {
+    const { data } = await http.post('/users/notifications/register', { subscription });
+    return data;
+  },
+
+  unsubscribeToNotifications: async () => {
+    const { data } = await http.delete('/users/notifications/unregister');
+    return data;
+  },
 };
 
 export default usersHttp;

@@ -1,0 +1,18 @@
+{
+  "name": "chatterona-ui-server",
+  "version": "1.0.0",
+  "description": "chatterona ui server",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:ui": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "brandon counts",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}

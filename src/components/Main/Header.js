@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     position: "absolute",
     top: 0,
-    width: "calc(100% - 312px)",
-    left: 312,
+    width: "100%",
+    left: 0,
   },
   appbar: {
     height: 46,
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ channelName, logoutUser }) => {
+const Header = ({ channelName, logoutUser, updateDrawer }) => {
   const classes = useStyles();
 
   const renderSelectedChannel = () => {
@@ -81,7 +81,8 @@ const Header = ({ channelName, logoutUser }) => {
       <AppBar elevation={2} className={classes.appbar} position="static">
         <Toolbar>
           {renderSelectedChannel()}
-          <Button onClick={logoutUser} color="secondary" style={{ marginLeft: 'auto'}}>Logout</Button>
+          <Button onClick={updateDrawer} color="secondary" >show drawer</Button>
+          {/* <Button onClick={logoutUser} color="secondary" style={{ marginLeft: 'auto'}}>Logout</Button> */}
           </Toolbar>
 
       </AppBar>

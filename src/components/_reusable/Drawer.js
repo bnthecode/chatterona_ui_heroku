@@ -4,7 +4,7 @@ const Drawer = ({ width, variant, anchor, children, ...rest }) => {
 
     const useStyles = makeStyles((theme) => ({
         drawerWrapper: {
-            position: 'absolute',
+            position: 'fixed',
             width: width,
             height: '100vh',
         },

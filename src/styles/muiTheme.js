@@ -47,7 +47,12 @@ const theme = createMuiTheme({
           padding: 10,
           backgroundColor: "#202225",
         }
+    },
+    MuiTextField: {
+    
+      // to bring in later
     }
+    
   }
 });
 

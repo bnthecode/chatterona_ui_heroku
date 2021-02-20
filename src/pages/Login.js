@@ -6,7 +6,6 @@ import {
   makeStyles,
   Typography,
   TextField,
-  Fade,
   Paper,
 } from "@material-ui/core";
 import { connect } from "react-redux";
@@ -98,14 +97,15 @@ const useStyles = makeStyles((theme) => ({
 const Login = ({ setAuthUser, history }) => {
   const classes = useStyles();
   const [loggingIn, setLoggingIn] = useState(false);
-  const [username, setUsername] = useState("");
   const [tab, setTab] = useState("Login");
+
+  
   const handleInitSignIn = async () => {
     setLoggingIn(true);
     const user = await usersHttp.loginUser(config.devUser);
     setAuthUser(user);
     setTimeout(async () => {
-      history.push("/");
+      history.push("/@me");
     }, 1000);
   };
 

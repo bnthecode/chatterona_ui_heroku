@@ -21,6 +21,11 @@ const serverService = {
     const { data } = await http.post("/servers", { server })
     return data;
   },
+
+  addUserToServer: async (serverId, userId) => {
+    const { data } = await http.put(`/servers/${serverId}/users`, { userId });
+    return data;
+  }
 };
 
 export default serverService;

@@ -1,16 +1,12 @@
-import { Divider, List as MuiList, makeStyles, Paper } from "@material-ui/core";
-import clsx from "clsx";
+import { Divider, List as MuiList } from "@material-ui/core";
 import ListItem from "./ListItem";
 
-const useStyles = makeStyles((theme) => ({
-  menu: {},
-}));
 
 const List = ({ listProps = {}, listItemProps = {} }) => {
   const { listItems, listClass } = listProps;
   const buildListItems = () => {
-    return listItems.map((option) => (
-      <div>
+    return listItems.map((option, i) => (
+      <div key={`${option.name}_${i}`}>
         <ListItem listItem={option} listItemProps={listItemProps} />
         {option.break && (
           <Divider
@@ -26,7 +22,6 @@ const List = ({ listProps = {}, listItemProps = {} }) => {
     ));
   };
 
-  const classes = useStyles();
   return <MuiList className={listClass}>{buildListItems()}</MuiList>;
 };
 

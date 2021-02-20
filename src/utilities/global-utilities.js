@@ -51,6 +51,15 @@ export const checkContentType = (url) => {
 };
 
 
+export const getIdsFromUrl = (url) => {
+  const urls = url.split('servers');  
+  const ids = urls[1] && urls[1].split('/');
+  const serverId = ids && ids.length ? ids[1] : null;
+  const channelId = serverId ? ids[2] : null;
+  return { serverId, channelId };
+ };
+
+
 export const checkUrlsContent = async (url) => {
 
   try { 

@@ -23,3 +23,11 @@ export const setServerUsersRedux = (dispatch) => (users) => {
     dispatch({ type: 'SET_SERVER_USERS', payload: users})
 }
 
+export const setUserFriendsRedux = (dispatch) => (friends) => {
+    dispatch({ type: 'SET_USER_FRIENDS', payload: friends})
+}
+
+
+export const setDirectMessagesRedux = (dispatch) => (directMessages) => {
+    dispatch({ type: 'SET_DIRECT_MESSAGES', payload: directMessages})
+}

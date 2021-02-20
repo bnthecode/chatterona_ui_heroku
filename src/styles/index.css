@@ -16,7 +16,7 @@ code {
   position: relative;
   /* text-transform: uppercase; */
   letter-spacing: 2px;
-  font-weight: 900;
+  font-weight: 700;
   text-decoration: none;
   color: #fff;
   display: inline-block;
@@ -34,10 +34,10 @@ code {
 }
 
 @keyframes shake {
-  0% { transform: skewX(-10deg); }
-  25% { transform: skewX(10deg); }
-  50% { transform: skewX(-10deg); }
-  75% { transform: skewX(10deg); }
-  100% { transform: skewX(-10deg); }
+  0% { transform: skewX(-5deg); }
+  25% { transform: skewX(5deg); }
+  50% { transform: skewX(-5deg); }
+  75% { transform: skewX(5deg); }
+  100% { transform: skewX(-5deg); }
 
 }

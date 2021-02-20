@@ -5,7 +5,9 @@ const initialState = {
   channels: [],
   channelId: '',
   messages: [],
-  users: []
+  users: [],
+  friends: [],
+  directMessages: []
 };
 
 const appReducer = (state = initialState, action) => {
@@ -50,6 +52,20 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         users: action.payload,
+      };
+    }
+
+    case "SET_USER_FRIENDS": {
+      return {
+        ...state,
+        friends: action.payload,
+      };
+    }
+
+    case "SET_DIRECT_MESSAGES": {
+      return {
+        ...state,
+        directMessages: action.payload,
       };
     }
 
