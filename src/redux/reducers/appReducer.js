@@ -1,29 +1,71 @@
 const initialState = {
   mobileView: false,
-  selectedServer: {
-    name: "",
-    id: "",
-  },
-  selectedChannel: {
-    name: "",
-    id: "",
-  },
+  servers: [],
+  serverId: "",
+  channels: [],
+  channelId: "",
+  messages: [],
+  users: [],
+  friends: [],
+  directMessages: [],
 };
 
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
     // servers
-    case "SET_SERVER": {
+
+    case "SET_SERVERS": {
       return {
         ...state,
-        selectedServer: action.payload,
+        servers: action.payload,
       };
     }
-    // channels
-    case "SET_CHANNEL": {
+
+    case "SET_SERVER_ID": {
       return {
         ...state,
-        selectedChannel: action.payload,
+        serverId: action.payload,
+      };
+    }
+
+    // channels
+    case "SET_CHANNELS": {
+      return {
+        ...state,
+        channels: action.payload,
+      };
+    }
+    case "SET_CHANNEL_ID": {
+      return {
+        ...state,
+        channelId: action.payload,
+      };
+    }
+    case "SET_CHANNEL_MESSAGES": {
+      return {
+        ...state,
+        messages: action.payload,
+      };
+    }
+
+    case "SET_SERVER_USERS": {
+      return {
+        ...state,
+        users: action.payload,
+      };
+    }
+
+    case "SET_USER_FRIENDS": {
+      return {
+        ...state,
+        friends: action.payload,
+      };
+    }
+
+    case "SET_DIRECT_MESSAGES": {
+      return {
+        ...state,
+        directMessages: action.payload,
       };
     }
 

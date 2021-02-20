@@ -1,29 +1,31 @@
 const initialState = {
-    user: null
+  user: {},
 };
 
 const authReducer = (state = initialState, action) => {
-
-    switch(action.type) {
-   
-        case 'LOG_USER_IN': {
-            const { user } = action.payload;
-            return {
-                ...state,
-                user: { 
-                    displayName: user.displayName,
-                    uid: user.uid,
-                    email: user.email,
-                    photoURL: user.photoURL
-                }
-            }  
-        }
-        default: {
-            return {
-                ...state
-            };
-        }
+  switch (action.type) {
+    case "SET_AUTH_USER": {
+      return {
+        ...state,
+        user: action.payload,
+      };
     }
-}
+
+    case "SET_USER_FRIENDS": {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          friends: action.payload,
+        },
+      };
+    }
+    default: {
+      return {
+        ...state,
+      };
+    }
+  }
+};
 
 export default authReducer;
