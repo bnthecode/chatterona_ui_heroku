@@ -1,7 +1,6 @@
 import { Divider, List as MuiList } from "@material-ui/core";
 import ListItem from "./ListItem";
 
-
 const List = ({ listProps = {}, listItemProps = {} }) => {
   const { listItems, listClass } = listProps;
   const buildListItems = () => {

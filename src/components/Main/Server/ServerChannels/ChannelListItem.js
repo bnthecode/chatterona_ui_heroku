@@ -19,7 +19,6 @@ const useStyles = makeStyles(() => ({
       color: "#fff",
     },
     "&:focus": {
-
       backgroundColor: "#23272a",
     },
     marginLeft: 8,
@@ -32,7 +31,7 @@ const useStyles = makeStyles(() => ({
       color: "#fff",
     },
     borderRadius: 6,
-    backgroundColor: 'transparent'
+    backgroundColor: "transparent",
   },
   selected: {
     color: "white",
@@ -42,9 +41,11 @@ const useStyles = makeStyles(() => ({
       color: "#fff",
     },
   },
-  iconRight : {
-    marginLeft: "auto", '&:hover': {color: "#fff"}, cursor: "pointer"
-  }
+  iconRight: {
+    marginLeft: "auto",
+    "&:hover": { color: "#fff" },
+    cursor: "pointer",
+  },
 }));
 
 const ChannelListItem = ({
@@ -54,10 +55,10 @@ const ChannelListItem = ({
   iconRight,
   onClick,
   header,
-  titleStyle
+  titleStyle,
 }) => {
   const classes = useStyles();
-  const updatedTitle = truncateString(title || 'er', 26);
+  const updatedTitle = truncateString(title || "er", 26);
 
   return (
     <ListItem
@@ -83,16 +84,18 @@ const ChannelListItem = ({
           </Typography>
         }
       />
-   {  iconRight && <Tooltip placement="right" title={iconRight.title}>
-        <ListItemIcon>
-          <FontAwesomeIcon
-            onClick={iconRight.onClick}
-            className={classes.iconRight}
-            color="#636363"
-            icon={iconRight.icon}
-          ></FontAwesomeIcon>
-        </ListItemIcon>
-      </Tooltip>}
+      {iconRight && (
+        <Tooltip placement="right" title={iconRight.title}>
+          <ListItemIcon>
+            <FontAwesomeIcon
+              onClick={iconRight.onClick}
+              className={classes.iconRight}
+              color="#636363"
+              icon={iconRight.icon}
+            ></FontAwesomeIcon>
+          </ListItemIcon>
+        </Tooltip>
+      )}
     </ListItem>
   );
 };

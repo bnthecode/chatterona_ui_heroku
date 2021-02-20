@@ -1,66 +1,58 @@
 import { createMuiTheme } from "@material-ui/core";
 const theme = createMuiTheme({
   palette: {
-
     primary: {
       light: "#202225",
       main: "#36393f",
-      dark: '#202225',
-      contrastText: '#ffffff'
+      dark: "#202225",
+      contrastText: "#ffffff",
     },
     secondary: {
-      light: '#212121',
+      light: "#212121",
       main: "#7289da",
-      dark: "#23272a"
-    }
+      dark: "#23272a",
+    },
   },
   typography: {
     fontFamily: [
-      '-apple-system',
-      'Open Sane',
-      'BlinkMacSystemFont',
+      "-apple-system",
+      "Open Sane",
+      "BlinkMacSystemFont",
       '"Segoe UI"',
-      'Roboto',
-      'Uni Sans',
+      "Roboto",
+      "Uni Sans",
       '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
+      "Arial",
+      "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(','),
+    ].join(","),
   },
   overrides: {
-
-      MuiCssBaseline: {
-        '@global': {
-          '@font-face': "Open Sans",
-        },
+    MuiCssBaseline: {
+      "@global": {
+        "@font-face": "Open Sans",
       },
+    },
 
-      MuiTooltip: {
-        tooltip: {
-          fontSize: 12,
-          opacity: '.8',
-          fontWeight: 700,
-          color: "#fff",
-          padding: 10,
-          backgroundColor: "#202225",
-        }
+    MuiTooltip: {
+      tooltip: {
+        fontSize: 12,
+        opacity: ".8",
+        fontWeight: 700,
+        color: "#fff",
+        padding: 10,
+        backgroundColor: "#202225",
+      },
     },
     MuiTextField: {
-    
       // to bring in later
-    }
-    
-  }
+    },
+  },
 });
 
 export default theme;
-
-
-
-
 
 // --header-primary: #fff;
 //     --header-secondary: #b9bbbe;

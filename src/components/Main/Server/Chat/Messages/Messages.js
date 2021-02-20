@@ -4,12 +4,10 @@ import MessageItem from "./MessageItem";
 import NewDayDivider from "./NewDayDivider";
 import NoMessagesDisplay from "./NoMessagesDisplay";
 const Messages = ({ messages, messageRef }) => {
-
   return messages && messages.length ? (
     <div>
       {messages.map((message, index) => (
         <div key={`${message}_${index}`}>
- 
           <Grid item xs={12}>
             <NewDayDivider
               messages={messages}

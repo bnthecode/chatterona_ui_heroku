@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
-import history from '../history';
+import history from "../history";
 import mainReducer from "./mainReducer";
 import serverReducer from "./serverReducer";
 import connectionsReducer from "./connectionsReducer";
@@ -11,25 +11,20 @@ import connectionsReducer from "./connectionsReducer";
 const persistConfig = {
   key: "chatteroni",
   storage,
-  whitelist: ['auth']
+  whitelist: ["auth"],
 };
 
 const authPersistConfig = {
-  key: 'auth',
+  key: "auth",
   storage: storage,
   // whitelist: ['user']
-}
+};
 
 const mainPersistConfig = {
-  key: 'main',
+  key: "main",
   storage: storage,
-  whitelist: ['serverId', 'channelId', 'channels']
-}
-
-
-
-
-
+  whitelist: ["serverId", "channelId", "channels"],
+};
 
 const rootReducer = (history) =>
   combineReducers({
@@ -40,6 +35,6 @@ const rootReducer = (history) =>
     router: connectRouter(history),
   });
 
-  const persistedReducer = persistReducer(persistConfig, rootReducer(history));
+const persistedReducer = persistReducer(persistConfig, rootReducer(history));
 
 export default persistedReducer;

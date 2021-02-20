@@ -1,14 +1,12 @@
 import { Divider, makeStyles } from "@material-ui/core";
 import Drawer from "../../_reusable/Drawer";
-import { useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import ExploreIcon from "@material-ui/icons/Explore";
 import DownloadIcon from "@material-ui/icons/GetApp";
-import VideogameAssetIcon from "@material-ui/icons/VideogameAsset";
 import { useState } from "react";
 import ServerListItem from "./ServerListItem";
 import AddServer from "../AddServer/AddServer";
-import { CastConnected, VpnLock } from "@material-ui/icons";
+import { CastConnected } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -27,11 +25,11 @@ const useStyles = makeStyles((theme) => ({
     width: "calc(100% - 40px)",
   },
   mainIcon: {
-    color: '#bdbdbd',
+    color: "#bdbdbd",
   },
   selected: {
-    backgroundColor: '#7289da'
-  }
+    backgroundColor: "#7289da",
+  },
 }));
 const ServerList = ({
   servers,
@@ -39,7 +37,6 @@ const ServerList = ({
   selectedItem,
   createServer,
   handleSelection,
-  navigateToPublicServers,
 }) => {
   const [showAddServerDialog, setAddServerDialogOpen] = useState(false);
   const isSelected = (id) => selectedItem === id || serverId === id;
@@ -60,10 +57,10 @@ const ServerList = ({
         selected={isSelected("@me")}
         setSelected={() => handleSelection("@me")}
       >
-        <CastConnected style={{fontSize: 28}} />
+        <CastConnected style={{ fontSize: 28 }} />
       </ServerListItem>
       <Divider className={classes.divider} />
-      {servers &&
+      {servers ? (
         servers.map((svr) => (
           <ServerListItem
             title={svr.name}
@@ -75,7 +72,10 @@ const ServerList = ({
               style: { backgroundImage: `url(${svr.photoURL})` },
             }}
           />
-        ))}
+        ))
+      ) : (
+        <div />
+      )}
       <ServerListItem
         title="Add a server"
         id="add-server"

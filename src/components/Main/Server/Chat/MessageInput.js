@@ -73,7 +73,7 @@ const MessageInput = ({ addMessageToChannel, sendWebsocketChannelTyper }) => {
     const type = validateUrl(value);
     setMessage(value);
     setMessageType(type);
-    if(value.length > 1 && value.length < 3) sendWebsocketChannelTyper();
+    if (value.length > 1 && value.length < 3) sendWebsocketChannelTyper();
   };
   const handleSubmit = async () => {
     setLoader(true);
@@ -108,7 +108,9 @@ const MessageInput = ({ addMessageToChannel, sendWebsocketChannelTyper }) => {
       }}
       style={{ fontSize: "24px" }}
       variant="outlined"
-      placeholder={loader ? `I'm trying to speed this up...` : `Message # name....`}
+      placeholder={
+        loader ? `I'm trying to speed this up...` : `Message # name....`
+      }
       autoFocus
       onKeyPress={(e) => (e.key === "Enter" ? handleSubmit() : null)}
       onChange={({ target: { value } }) => handleTyping(value)}

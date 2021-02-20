@@ -25,7 +25,6 @@ class Voice {
 
       mine.onIceCandidate = (e) => mine.addIceCandidate(e.candidate);
 
-      
       connection.send(
         JSON.stringify({
           type: "create-offer",
@@ -33,9 +32,7 @@ class Voice {
           channelId: channelId,
         })
       );
-    } catch (err) {
- 
-    }
+    } catch (err) {}
   };
 
   createRemotePeer = async (channelId, offer, connection) => {
@@ -47,9 +44,7 @@ class Voice {
     await theirs.setLocalDescription(answer);
 
     theirs.onicecandidate = (e) => theirs.addIceCandidate(e.candidate);
-    theirs.ontrack = (e) => {
-
-    };
+    theirs.ontrack = (e) => {};
 
     connection.send(
       JSON.stringify({
@@ -65,7 +60,6 @@ class Voice {
   };
 
   onIceCandidate = (event) => {
-
     if (event.candidate) {
       this.connection.send(
         JSON.stringify({
@@ -77,9 +71,7 @@ class Voice {
     }
   };
 
-  onTrack = (event) => {
-
-  };
+  onTrack = (event) => {};
 }
 
 export default Voice;

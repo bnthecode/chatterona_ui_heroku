@@ -1,8 +1,4 @@
-import {
-  DialogTitle,
-  Typography,
-  makeStyles,
-} from "@material-ui/core";
+import { DialogTitle, Typography, makeStyles } from "@material-ui/core";
 import { faChevronRight, faCrown } from "@fortawesome/free-solid-svg-icons";
 import DialogItem from "../DialogItem";
 
@@ -15,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 8,
     color: "grey",
   },
-
 }));
 const PageOne = ({ setStep, step }) => {
   const classes = useStyles();
@@ -23,7 +18,7 @@ const PageOne = ({ setStep, step }) => {
     <>
       <DialogTitle>
         <Typography className={classes.title}>Create a server</Typography>
-        <Typography variant="body2"  className={classes.subtitle}>
+        <Typography variant="body2" className={classes.subtitle}>
           Your server is where you and your friends hang out. Make yours and
           start talking.
         </Typography>

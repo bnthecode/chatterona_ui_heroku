@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
     height: 40,
     width: 40,
   },
-  userText:{
+  userText: {
     fontSize: "14px",
 
     color: "#71368A",

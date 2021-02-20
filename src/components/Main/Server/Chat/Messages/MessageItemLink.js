@@ -38,9 +38,9 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "nowrap",
   },
   linkBody2: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center'
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
 }));
 const MessageItemLink = ({ content }) => {

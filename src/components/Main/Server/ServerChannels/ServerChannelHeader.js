@@ -44,7 +44,6 @@ const ServerChannelHeader = ({ serverName, friends = [], inviteUsers }) => {
     const foundComponent = components[key];
 
     if (key === "hide_muted_channels") {
-
       return;
     }
     if (foundComponent && !foundComponent.newPage) {
@@ -81,7 +80,9 @@ const ServerChannelHeader = ({ serverName, friends = [], inviteUsers }) => {
         }}
         onClick={toggleHeaderOptions}
       >
-        <Typography style={{ color: "white", fontSize: 14, flexGrow: 1, fontWeight: 500 }}>
+        <Typography
+          style={{ color: "white", fontSize: 14, flexGrow: 1, fontWeight: 500 }}
+        >
           {serverName}
         </Typography>
         <FontAwesomeIcon

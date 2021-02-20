@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Dialog, DialogTitle, InputLabel, Paper, TextField, Typography } from "@material-ui/core";
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  InputLabel,
+  Paper,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: 24,
     fontWeight: 700,
-    color: '#fff'
+    color: "#fff",
   },
   subtitle: {
     color: "grey",
@@ -40,10 +48,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
 
-
   footerText: {
     fontWeight: 600,
-    color: '#fff',
+    color: "#fff",
     cursor: "pointer",
     margin: 20,
   },
@@ -61,28 +68,27 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   label: {
-      color: 'grey',
+    color: "grey",
     fontSize: 12,
     fontWeight: 800,
     alignSelf: "flex-start",
     marginBottom: 4,
   },
   input: {
-    '&::placeholder': {
-        color: 'white',
-      },
-      '&:focused': {
-        borderColor: 'orange'
-     },
-      backgroundColor: theme.palette.primary.dark,
-      color: 'white',
+    "&::placeholder": {
+      color: "white",
+    },
+    "&:focused": {
+      borderColor: "orange",
+    },
+    backgroundColor: theme.palette.primary.dark,
+    color: "white",
     fontWeight: 600,
     height: 36,
     fontSize: 12,
     padding: 2,
   },
   focused: {},
-
 }));
 
 const CreateChannelDialog = ({
@@ -91,8 +97,8 @@ const CreateChannelDialog = ({
   open,
   type,
 }) => {
-    const classes = useStyles();
-  const [channelName, setChannelName ] = useState('');
+  const classes = useStyles();
+  const [channelName, setChannelName] = useState("");
   return (
     <Dialog
       PaperProps={{
@@ -105,10 +111,10 @@ const CreateChannelDialog = ({
         className={classes.closeBtn}
         icon={faTimes}
       ></FontAwesomeIcon>
-         <DialogTitle>
+      <DialogTitle>
         <Typography className={classes.title}>Create {type} channel</Typography>
-        <Typography variant="body2"  className={classes.subtitle}>
-            in {type} channels
+        <Typography variant="body2" className={classes.subtitle}>
+          in {type} channels
         </Typography>
       </DialogTitle>
       <InputLabel className={classes.label} htmlFor="server-name">
@@ -118,11 +124,11 @@ const CreateChannelDialog = ({
         autoFocus
         placeholder="new-channel"
         color="secondary"
-        onChange={({target : { value }}) => setChannelName(value)}
+        onChange={({ target: { value } }) => setChannelName(value)}
         InputProps={{
           className: classes.input,
           focused: classes.focused,
-          notchedOutline: classes.notchedOutline
+          notchedOutline: classes.notchedOutline,
         }}
         className={classes.muiInput}
         id="server-name"
@@ -130,14 +136,11 @@ const CreateChannelDialog = ({
         margin="dense"
       ></TextField>
       <Paper className={classes.footer}>
-        <Typography
-          className={classes.footerText}
-          variant="body2"
-        >
+        <Typography className={classes.footerText} variant="body2">
           Cancel
         </Typography>
         <Button
-          onClick={() => handleAddChannel({ name: channelName, type})}
+          onClick={() => handleAddChannel({ name: channelName, type })}
           className={classes.footerButton}
         >
           Create Channel

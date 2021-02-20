@@ -1,11 +1,11 @@
-import React,{ memo, useState } from "react";
-import {  Paper, TextField, Typography } from "@material-ui/core";
+import React, { memo, useState } from "react";
+import { Paper, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import emojione from "emojione";
-import { peopleEmojis } from '../../../../../constants/emojis';
+import { peopleEmojis } from "../../../../../constants/emojis";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
-import Backdrop from '@material-ui/core/Backdrop';
+import Backdrop from "@material-ui/core/Backdrop";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
   emoji: {
     fontSize: 30,
@@ -61,38 +61,42 @@ const EmojiPicker = ({ open, toggleEmojiPicker }) => {
   };
 
   return open ? (
-    <Backdrop className={classes.backdrop} open={open} onClick={toggleEmojiPicker}>
-    <Paper className={classes.paper}>
-      <Paper className={classes.header}>
-        <TextField
-          autoFocus={true}
-          onChange={handleSearch}
-          value={searchText}
-          style={{ width: "85%" }}
-          InputProps={{
-            endAdornment: (
-              <FontAwesomeIcon
-                style={{ cursor: "pointer" }}
-                onClick={() => setSearchText("")}
-                icon={searchText.length ? faTimes : faSearch}
-              />
-            ),
-            className: classes.input,
-          }}
-          variant="outlined"
-        ></TextField>
-        <Typography className={classes.emoji}>👏</Typography>
+    <Backdrop
+      className={classes.backdrop}
+      open={open}
+      onClick={toggleEmojiPicker}
+    >
+      <Paper className={classes.paper}>
+        <Paper className={classes.header}>
+          <TextField
+            autoFocus={true}
+            onChange={handleSearch}
+            value={searchText}
+            style={{ width: "85%" }}
+            InputProps={{
+              endAdornment: (
+                <FontAwesomeIcon
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setSearchText("")}
+                  icon={searchText.length ? faTimes : faSearch}
+                />
+              ),
+              className: classes.input,
+            }}
+            variant="outlined"
+          ></TextField>
+          <Typography className={classes.emoji}>👏</Typography>
+        </Paper>
+        {peopleEmojis.map((emoji, index) => (
+          <div
+            id={index}
+            className={classes.emoji}
+            key={index}
+            role="presentation"
+            dangerouslySetInnerHTML={{ __html: emojione.unicodeToImage(emoji) }}
+          />
+        ))}
       </Paper>
-      {peopleEmojis.map((emoji, index) => (
-        <div
-          id={index}
-          className={classes.emoji}
-          key={index}
-          role="presentation"
-          dangerouslySetInnerHTML={{ __html: emojione.unicodeToImage(emoji) }}
-        />
-      ))}
-    </Paper>
     </Backdrop>
   ) : (
     ""

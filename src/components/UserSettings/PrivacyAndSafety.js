@@ -1,5 +1,5 @@
 const PrivacyAndSafety = () => {
-    return <div>Privacy And Safety</div>
-}
+  return <div>Privacy And Safety</div>;
+};
 
 export default PrivacyAndSafety;

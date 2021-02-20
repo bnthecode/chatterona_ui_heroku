@@ -1,4 +1,4 @@
-import { faCheck, faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.dark,
     color: "lightgrey",
     fontWeight: 500,
-    height: 42,
     fontSize: 12,
     height: 32,
   },
@@ -131,9 +130,7 @@ const CreateDirectMessageDialog = ({
     const alreadyAdded = addedFriends.includes(friendId);
     const newList = [...addedFriends, friendId];
     setAddedFriends([
-      ...(alreadyAdded
-        ? newList.filter((f) => f !== friendId)
-        : newList),
+      ...(alreadyAdded ? newList.filter((f) => f !== friendId) : newList),
     ]);
   };
 
@@ -169,13 +166,11 @@ const CreateDirectMessageDialog = ({
   };
   return (
     <Dialog open={open} handleClose={handleClose}>
-      {/* header */}
       <Paper square className={classes.header}>
         <Typography className={classes.headerText}>Create Group DM</Typography>
         <TextField
           autoFocus={true}
           placeholder="Search for friends"
-          // color="secondary"
           InputProps={{
             endAdornment: (
               <FontAwesomeIcon
@@ -198,13 +193,9 @@ const CreateDirectMessageDialog = ({
           variant="outlined"
         ></TextField>
       </Paper>
-
-      {/* content */}
       <Paper square className={classes.content}>
         {buildFriendsList()}
       </Paper>
-
-      {/* footer */}
       <Paper square className={classes.footer}>
         <Button
           disabled={!addedFriends.length}

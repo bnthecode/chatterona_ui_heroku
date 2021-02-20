@@ -1,5 +1,5 @@
 const AuthorizedApps = () => {
-    return <div>Authorized Apps</div>
-}
+  return <div>Authorized Apps</div>;
+};
 
 export default AuthorizedApps;

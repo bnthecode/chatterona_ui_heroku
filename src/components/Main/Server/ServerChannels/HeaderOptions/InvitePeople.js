@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.dark,
     color: "lightgrey",
     fontWeight: 500,
-    height: 42,
     fontSize: 12,
     height: 32,
   },

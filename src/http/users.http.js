@@ -11,7 +11,6 @@ const usersHttp = {
   },
 
   loginUser: async (user) => {
-
     const { data } = await http.put(`/users/login`, { user });
     return data;
   },
@@ -26,12 +25,14 @@ const usersHttp = {
   },
 
   subscribeToNotifications: async (subscription) => {
-    const { data } = await http.post('/users/notifications/register', { subscription });
+    const { data } = await http.post("/users/notifications/register", {
+      subscription,
+    });
     return data;
   },
 
   unsubscribeToNotifications: async () => {
-    const { data } = await http.delete('/users/notifications/unregister');
+    const { data } = await http.delete("/users/notifications/unregister");
     return data;
   },
 };

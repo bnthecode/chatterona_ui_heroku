@@ -17,9 +17,6 @@ const ChannelGroup = ({
   listItemClick,
   channelId,
 }) => {
-
-
-  
   const icons = {
     voice: faVolumeUp,
     text: faHashtag,
@@ -29,7 +26,11 @@ const ChannelGroup = ({
     <div>
       <ChannelListItem
         header
-        iconLeft={dropdownValues && dropdownValues[type] ? faChevronDown : faChevronRight}
+        iconLeft={
+          dropdownValues && dropdownValues[type]
+            ? faChevronDown
+            : faChevronRight
+        }
         iconRight={{
           icon: headerIconRight,
           title: "Create a channel",

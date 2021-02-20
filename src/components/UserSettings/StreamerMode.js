@@ -1,5 +1,5 @@
 const StreamerMode = () => {
-    return <div>Streamer Mode</div>
-}
+  return <div>Streamer Mode</div>;
+};
 
 export default StreamerMode;

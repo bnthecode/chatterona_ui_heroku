@@ -6,7 +6,7 @@ const useStyles = makeStyles(() => ({
   drawer: {
     top: 46,
 
-    trasition: '1s all',
+    trasition: "1s all",
     alignItems: "center",
     height: "calc(100vh - 48px)",
     backgroundColor: "#2f3136",
@@ -81,7 +81,7 @@ const ServerUsers = ({ userDrawer }) => {
       className={classes.drawer}
       style={{
         width: userDrawer ? 240 : 0,
-        transition: '1s width',
+        transition: "1s width",
       }}
     >
       {serverUsers.map((user, i) => (

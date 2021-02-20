@@ -21,7 +21,7 @@ import LogOut from "../../components/UserSettings/LogOut";
 
 import Drawer from "../../components/_reusable/Drawer";
 import List from "../../components/_reusable/List";
-import { Button, Fade, Grow, Slide } from "@material-ui/core";
+import { Button, Grow, Slide } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 

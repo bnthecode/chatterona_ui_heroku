@@ -98,15 +98,21 @@ const Login = ({ setAuthUser, history }) => {
   const classes = useStyles();
   const [loggingIn, setLoggingIn] = useState(false);
   const [tab, setTab] = useState("Login");
+  const [userData, setUserData] = useState({});
 
-  
   const handleInitSignIn = async () => {
+    const updatedUser = { ...config.devUser, userData };
+    let user;
+    if (tab === "Login") {
+      user = await usersHttp.loginUser(updatedUser);
+    } else {
+      user = await usersHttp.createUser(updatedUser);
+    }
     setLoggingIn(true);
-    const user = await usersHttp.loginUser(config.devUser);
     setAuthUser(user);
     setTimeout(async () => {
       history.push("/@me");
-    }, 1000);
+    }, 750);
   };
 
   return (
@@ -131,26 +137,30 @@ const Login = ({ setAuthUser, history }) => {
       </Typography>
       <Paper elevation={24} className={classes.paper}>
         <Paper square className={classes.header}>
-          { ['Login', 'Sign up'].map((item) => (
+          {["Login", "Sign up"].map((item) => (
             <Paper
-            style={{
-              backgroundColor: tab === item ? "#7289da" : "transparent",
-              cursor: 'pointer',
-              transition: 'all .5s',
-              display: "flex",
-              justifyContent: "center",
-              alignItems: 'center',
-              opacity: ".8",
-              height: "100%",
-              width: "50%",
-            }}
-            onClick={() => setTab(item)}
-            square
-          >
-            <Typography style={{ opacity: tab === item ? ".8" : ".25",}} className={classes.tabItem}>{item}</Typography>
-          </Paper>
+              style={{
+                backgroundColor: tab === item ? "#7289da" : "transparent",
+                cursor: "pointer",
+                transition: "all .5s",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                opacity: ".8",
+                height: "100%",
+                width: "50%",
+              }}
+              onClick={() => setTab(item)}
+              square
+            >
+              <Typography
+                style={{ opacity: tab === item ? ".8" : ".25" }}
+                className={classes.tabItem}
+              >
+                {item}
+              </Typography>
+            </Paper>
           ))}
-          
         </Paper>
         <div className={classes.content}>
           <div className={classes.flexRow}>
@@ -174,6 +184,9 @@ const Login = ({ setAuthUser, history }) => {
                 focused: classes.focused,
                 notchedOutline: classes.notchedOutline,
               }}
+              onChange={({ target: { value } }) =>
+                setUserData({ ...userData, username: value })
+              }
               className={classes.muiInput}
               id="username"
               variant="outlined"
@@ -181,6 +194,7 @@ const Login = ({ setAuthUser, history }) => {
           </div>
           <div className={classes.flexRow}>
             <TextField
+              type="password"
               placeholder="password"
               color="secondary"
               InputProps={{
@@ -188,13 +202,20 @@ const Login = ({ setAuthUser, history }) => {
                 focused: classes.focused,
                 notchedOutline: classes.notchedOutline,
               }}
+              onChange={({ target: { value } }) =>
+                setUserData({ ...userData, password: value })
+              }
               className={classes.muiInput}
               id="username"
               variant="outlined"
             ></TextField>
           </div>
           <Paper square className={classes.footer}>
-            <Button onClick={handleInitSignIn} className={classes.btn2} color="secondary">
+            <Button
+              onClick={handleInitSignIn}
+              className={classes.btn2}
+              color="secondary"
+            >
               Get started
             </Button>
           </Paper>
@@ -209,174 +230,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(Login);
-
-// import { faAt, faCommentDots } from "@fortawesome/free-solid-svg-icons";
-// import { useState } from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//   Button,
-//   makeStyles,
-//   Typography,
-//   TextField,
-//   Fade,
-// } from "@material-ui/core";
-// import { connect } from "react-redux";
-// import { setAuthUserRedux } from "../redux/actions/authActions";
-// import config from "../config";
-// import usersHttp from "../http/users.http";
-
-// const useStyles = makeStyles((theme) => ({
-//   input: {
-//     "&::placeholder": {
-//       color: "white",
-//     },
-
-//     backgroundColor: theme.palette.primary.dark,
-//     color: "white",
-//     fontWeight: 600,
-//     height: 36,
-//     fontSize: 12,
-//     padding: 2,
-//   },
-//   muiInput: {
-//     marginTop: 80,
-//     width: 200,
-//   },
-//   focused: {},
-// }));
-// const Login = ({ setAuthUser, history }) => {
-//   const classes = useStyles();
-//   const [loggingIn, setLoggingIn] = useState(false);
-//   const [username, setUsername] = useState("");
-
-//   const handleInitSignIn = async () => {
-//     setLoggingIn(true);
-//     const user = await usersHttp.loginUser(config.devUser);
-//     setAuthUser(user);
-//     setTimeout(async () => {
-//       history.push("/");
-//     }, 1000);
-//   };
-
-//   return (
-//     <div
-//       style={{
-//         opacity: loggingIn ? 0 : 1,
-//         transition: "2s all",
-//         display: "flex",
-//         paddingTop: "30vh",
-//         alignItems: "center",
-//         justifyContent: "middle",
-//         flexDirection: "column",
-//       }}
-//     >
-//       <Typography
-//         style={{
-//           color: "white",
-//           transition: "2s all",
-//           opacity: loggingIn ? 0 : 1,
-//           transform: `rotate(-${loggingIn ? 0 : 10}deg)`,
-//           fontSize: loggingIn ? 100 : 50,
-//         }}
-//       >
-//         Chatterona
-//         <FontAwesomeIcon
-//           icon={faCommentDots}
-//           style={{
-//             transform: "rotate(-8deg)",
-//             color: "#3d1059",
-//             margin: "1vh",
-//           }}
-//         ></FontAwesomeIcon>
-//       </Typography>
-
-//       <TextField
-//         autoFocus
-//         placeholder="username"
-//         color="secondary"
-//         onChange={({ target: { value } }) => setUsername(value)}
-//         InputProps={{
-//           startAdornment: (
-//             <FontAwesomeIcon
-//               style={{ color: "grey", marginLeft: 8, marginRight: 4 }}
-//               icon={faAt}
-//             />
-//           ),
-//           className: classes.input,
-//           focused: classes.focused,
-//           notchedOutline: classes.notchedOutline,
-//         }}
-//         className={classes.muiInput}
-//         autoFocus
-//         id="server-name"
-//         variant="outlined"
-//         margin="dense"
-//       ></TextField>
-//       <Fade in={!username.length} timeout={1000}>
-//         <div>
-//           <Typography
-//             style={{
-//               color: "white",
-//               position: "absolute",
-//               left: "49vw",
-//               top: 454,
-//               fontWeight: 800,
-//               transform: "rotate(-8deg)",
-//               opacity: loggingIn ? 0 : 1,
-//               transform: `rotate(-${loggingIn ? 0 : 10}deg)`,
-
-//             }}
-//           >
-//             OR
-//           </Typography>
-//           <Button
-//             style={{
-//               width: 200,
-//               marginTop: 30,
-//               backgroundColor: "#3d1059",
-//               color: "white",
-//               height: 36,
-//               fontWeight: 600,
-//               textTransform: "none",
-//             }}
-//             onClick={handleInitSignIn}
-//           >
-//             Continue as a bot
-//           </Button>
-//         </div>
-//       </Fade>
-
-//       <Fade in={username.length} timeout={1500}>
-//         <div style={{ width: "100%", textAlign: "center" }}>
-//                 <div style={{ display: 'flex', color: 'white', fontWeight: 700, justifyContent: 'center'}}>
-
-//           { ["P", "r", "e", "s", "s", "  ", "e", "n", "t", "e", "r"].map(
-//               (letter, i) => (
-//                 <Fade in timeout={i === 0 ? 500 : i * 1500}>
-//                   <div style={{ margin: 2, color: 'white'}}>{letter}</div>
-//                 </Fade>
-//               )
-//             )}
-//             </div>
-//         </div>
-//       </Fade>
-//       <span
-//         style={{
-//           position: "absolute",
-//           color: "white",
-//           bottom: 4,
-//           right: 0,
-//           fontSize: 12,
-//         }}
-//       >
-//         2/8/21 6:14PM
-//       </span>
-//     </div>
-//   );
-// };
-
-// const mapDispatchToProps = (dispatch) => ({
-//   setAuthUser: dispatch(setAuthUserRedux),
-// });
-
-// export default connect(null, mapDispatchToProps)(Login);
