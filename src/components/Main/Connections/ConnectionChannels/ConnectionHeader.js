@@ -1,30 +1,30 @@
 import { Paper, TextField, Typography, makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   input: {
-    '&::placeholder': {
-        color: 'white',
-      },
-      '&:focused': {
-        borderColor: 'orange'
-     },
-      backgroundColor: theme.palette.primary.dark,
-      color: 'white',
+    "&::placeholder": {
+      color: "white",
+    },
+    "&:focused": {
+      borderColor: "orange",
+    },
+    backgroundColor: theme.palette.primary.dark,
+    color: "white",
     fontWeight: 600,
     height: 36,
     fontSize: 12,
     padding: 2,
-    
-    cursor: 'pointer'
+
+    cursor: "pointer",
   },
   muiInput: {
-    '&:disabled': {
-      color: 'white'
+    "&:disabled": {
+      color: "white",
     },
-    width: '100%',
-    cursor: 'pointer'
+    width: "100%",
+    cursor: "pointer",
   },
   focused: {},
-}))
+}));
 const ConnectionChannelHeader = () => {
   const classes = useStyles();
   return (
@@ -49,9 +49,7 @@ const ConnectionChannelHeader = () => {
             color="secondary"
             InputProps={{
               className: classes.input,
-
             }}
-          
             className={classes.muiInput}
             id="server-name"
             variant="outlined"

@@ -6,40 +6,35 @@ import {
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
 const useStyles = makeStyles(() => ({
-    headerItem: {
+  headerItem: {
     width: "100%",
-    cursor: 'default',
+    cursor: "default",
     "&:hover": {
       backgroundColor: "transparent",
     },
     borderRadius: 4,
+  },
+  headerText: {
+    "&:hover": {
+      color: "white",
     },
-    headerText: {
-        "&:hover": {
-          color: "white",
-        },
-      },
-      menuItem: {
-        color: "#B9BBBE",
-        fontSize: 12,
-        fontWeight: 800,
-      },
-  }));
+  },
+  menuItem: {
+    color: "#B9BBBE",
+    fontSize: 12,
+    fontWeight: 800,
+  },
+}));
 
 const ListItemHeader = ({ headerProps, name }) => {
-    const classes = useStyles();
-    const { headerClass, headerTextClass } = headerProps;
+  const classes = useStyles();
+  const { headerClass, headerTextClass } = headerProps;
   return (
-    <MuiListItem
-      className={clsx([classes.headerItem, headerClass])}
-      dense
-    >
+    <MuiListItem className={clsx([classes.headerItem, headerClass])} dense>
       <ListItemText
         className={classes.headerText}
         primary={
-          <Typography
-            className={clsx([classes.menuItem, headerTextClass])}
-          >
+          <Typography className={clsx([classes.menuItem, headerTextClass])}>
             {name.toUpperCase()}
           </Typography>
         }

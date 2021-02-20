@@ -12,10 +12,9 @@ import ChannelHeader from "./ChannelNavigationHeader";
 import { withRouter } from "react-router";
 import serversHttp from "../../../http/servers-http";
 import { setChannelIdRedux } from "../../../redux/actions/mainActions";
-import usersHttp from "../../../http/users.http";
 import channelsHttp from "../../../http/channels-http";
 
-const styles = (theme) => ({
+const styles = () => ({
   drawer: { backgroundColor: "#2f3136", width: "310px" },
   list: { width: "100%", margin: 4 },
   wrapper: { paddingLeft: "72px", width: "calc(100% - 72px)" },
@@ -33,7 +32,6 @@ class ChannelNavigation extends PureComponent {
   };
 
   componentDidUpdate = async (prevProps) => {
-    console.log("updating.......");
     const { route, serverId } = this.props;
     if (prevProps.serverId !== serverId || prevProps.route !== route) {
       await this.routeHandlers(route, serverId);
@@ -46,6 +44,8 @@ class ChannelNavigation extends PureComponent {
         return await this.serverRouteHandler(serverId);
       case "@me":
         return await this.homeRouteHandler();
+      default:
+        return null;
     }
   };
 
@@ -64,10 +64,10 @@ class ChannelNavigation extends PureComponent {
     this.selectChannel(channels[0].id);
   };
 
-  handleDirectMessage = (channelId) => {};
+  handleDirectMessage = () => {};
 
   selectChannel = (channelId) => {
-    const { setChannelId, route, serverId, updateServerId } = this.props;
+    const { setChannelId } = this.props;
     this.setState({ channelId });
     setChannelId(channelId);
   };
@@ -89,9 +89,7 @@ class ChannelNavigation extends PureComponent {
     await serversHttp.addUserToServer(serverId, userId);
   };
 
-  createDirectMessage = () => {
-    // console.log("create dm");
-  };
+  createDirectMessage = () => {};
 
   navigateToUserSettings = () => {
     const { history } = this.props;
@@ -100,50 +98,54 @@ class ChannelNavigation extends PureComponent {
 
   getChannelHeader = (route) => {
     const { friends, serverName } = this.props;
-
+    const connections = <ConnectionChannelHeader />;
+    const servers = (
+      <ServerChannelHeader
+        inviteUsers={this.inviteUsers}
+        serverName={serverName}
+        friends={friends}
+      />
+    );
     switch (route) {
-      case "@me": {
-        return <ConnectionChannelHeader />;
-      }
-      case "server": {
-        return (
-          <ServerChannelHeader
-            inviteUsers={this.inviteUsers}
-            serverName={serverName}
-            friends={friends}
-          />
-        );
-      }
+      case "@me":
+        return connections;
+      case "server":
+        return servers;
+
+      default:
+        return servers;
     }
   };
 
   getChannelContent = (route) => {
     const { friends, userId } = this.props;
     const { channels, channelId } = this.state;
+    const connections = (
+      <ConnectionChannels
+        channels={channels}
+        channelId={channelId}
+        friends={friends}
+        userId={userId}
+        selectChannel={this.selectChannel}
+        createChannel={this.createChannel}
+        handleDirectMessage={this.handleDirectMessage}
+      />
+    );
+    const server = (
+      <ServerChannels
+        channels={channels}
+        channelId={channelId}
+        selectChannel={this.selectChannel}
+        createChannel={this.createChannel}
+      />
+    );
     switch (route) {
-      case "@me": {
-        return (
-          <ConnectionChannels
-            channels={channels}
-            channelId={channelId}
-            friends={friends}
-            userId={userId}
-            selectChannel={this.selectChannel}
-            createChannel={this.createChannel}
-            handleDirectMessage={this.handleDirectMessage}
-          />
-        );
-      }
-      case "server": {
-        return (
-          <ServerChannels
-            channels={channels}
-            channelId={channelId}
-            selectChannel={this.selectChannel}
-            createChannel={this.createChannel}
-          />
-        );
-      }
+      case "@me":
+        return connections;
+      case "server":
+        return server;
+      default:
+        return server;
     }
   };
 
@@ -169,7 +171,6 @@ class ChannelNavigation extends PureComponent {
   }
 }
 
-// we create separate connection / server for reloadability.. we save and pull
 const mapStateToProps = (state) => ({
   username: state.auth.user.username,
   userPhoto: state.auth.user.photoURL,

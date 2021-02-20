@@ -1,22 +1,15 @@
 import { makeStyles } from "@material-ui/styles";
 import { useEffect, useState } from "react";
 import CreateChannelDialog from "./CreateChannelDialog";
-import { Collapse, List } from "@material-ui/core";
+import { List } from "@material-ui/core";
 import {
-  faChevronDown,
-  faChevronRight,
   faHashtag,
   faPlus,
   faVolumeUp,
 } from "@fortawesome/free-solid-svg-icons";
 import CollapsableListItem from "../../../_reusable/CollapsableListItem";
 import _ from "lodash";
-import {
-  KeyboardArrowLeft,
-  KeyboardArrowDown,
-  VolumeUp,
-  KeyboardArrowRight,
-} from "@material-ui/icons";
+import { KeyboardArrowDown, KeyboardArrowRight } from "@material-ui/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const useStyles = makeStyles(() => ({
@@ -47,8 +40,8 @@ const ServerChannels = ({
       );
       setCollapsed({ ...collapsed, [collapseId]: true });
     }
-  }, []);
-  
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const classes = useStyles();
   const [showChannelDialog, setChannelDialogOpen] = useState(false);
   const [channelType, setChannelType] = useState("text");
@@ -69,7 +62,6 @@ const ServerChannels = ({
               iconLeft={
                 collapsed[i] ? (
                   <KeyboardArrowRight style={{ fontSize: 18 }} />
-                
                 ) : (
                   <KeyboardArrowDown style={{ fontSize: 18 }} />
                 )
@@ -90,38 +82,32 @@ const ServerChannels = ({
               }
               header
             />
-              {item.map((channel) => (
-                <CollapsableListItem
-
-                  selected={channelId === channel.id}
-                  onClick={() => selectChannel(channel.id)}
-                  style={{
-                    
-                    display:
-                      collapsed[i] === true && channelId !== channel.id
-                        ? "none"
-                        : "block",
-                  }}
-                  iconLeft={
-                    channel.type === "text" ? (
-                      <FontAwesomeIcon icon={faHashtag} style={{ width: 20 }} />
-                    ) : (
-                      <FontAwesomeIcon
-                        style={{ width: 20 }}
-                        icon={faVolumeUp}
-                      />
-                    )
-                  }
-
-                  title={
-                    <span style={{ marginLeft: 10 }}>
-                      {channel.name || "nameless channel :("}
-                    </span>
-                  }
-                  id="123"
-                  primary
-                />
-              ))}
+            {item.map((channel) => (
+              <CollapsableListItem
+                selected={channelId === channel.id}
+                onClick={() => selectChannel(channel.id)}
+                style={{
+                  display:
+                    collapsed[i] === true && channelId !== channel.id
+                      ? "none"
+                      : "block",
+                }}
+                iconLeft={
+                  channel.type === "text" ? (
+                    <FontAwesomeIcon icon={faHashtag} style={{ width: 20 }} />
+                  ) : (
+                    <FontAwesomeIcon style={{ width: 20 }} icon={faVolumeUp} />
+                  )
+                }
+                title={
+                  <span style={{ marginLeft: 10 }}>
+                    {channel.name || "nameless channel :("}
+                  </span>
+                }
+                id="123"
+                primary
+              />
+            ))}
           </>
         ) : (
           ""

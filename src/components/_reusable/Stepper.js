@@ -6,12 +6,12 @@ const Stepper = ({ componentList, onComplete, user }) => {
   const Component = componentList[step];
 
   return (
-      <Component
-        setStep={setStep}
-        onComplete={onComplete}
-        step={step}
-        user={user}
-      />
+    <Component
+      setStep={setStep}
+      onComplete={onComplete}
+      step={step}
+      user={user}
+    />
   );
 };
 const mapStateToProps = (state) => ({

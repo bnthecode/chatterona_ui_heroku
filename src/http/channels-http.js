@@ -10,7 +10,6 @@ const channelsHttp = {
     return data;
   },
 
-
   createDirectMessage: async (channel) => {
     const { data } = await http.post(`/channels`, {
       channel,
@@ -24,19 +23,21 @@ const channelsHttp = {
   },
 
   getChannelMessages: async (channelId, page = 1, limit = 20) => {
-    const { data } = await http.get(`/channels/${channelId}/messages?page=${page}&limit=${limit}`);
+    const { data } = await http.get(
+      `/channels/${channelId}/messages?page=${page}&limit=${limit}`
+    );
     return data;
   },
 
   createChannelMessage: async (channelId, message, isPreviousAuthor) => {
     const { data } = await http.post(`/channels/${channelId}/messages`, {
       message,
-      isPreviousAuthor
+      isPreviousAuthor,
     });
     return data;
   },
   setTyping: async (channelId) => {
-     await http.post(`/channels/${channelId}/typing`)
+    await http.post(`/channels/${channelId}/typing`);
   },
 };
 

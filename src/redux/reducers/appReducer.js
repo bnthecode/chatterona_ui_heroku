@@ -1,13 +1,13 @@
 const initialState = {
   mobileView: false,
   servers: [],
-  serverId: '',
+  serverId: "",
   channels: [],
-  channelId: '',
+  channelId: "",
   messages: [],
   users: [],
   friends: [],
-  directMessages: []
+  directMessages: [],
 };
 
 const appReducer = (state = initialState, action) => {

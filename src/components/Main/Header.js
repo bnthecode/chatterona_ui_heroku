@@ -6,7 +6,7 @@ import { Button, Divider, Typography } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHashtag, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
     position: "absolute",
@@ -35,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
   },
   subHeaderWrapper: {
-    width: 100, marginBottom: 20
+    width: 100,
+    marginBottom: 20,
   },
   subHeaderText: {
     color: "grey",
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ channelName, logoutUser, updateDrawer }) => {
+const Header = ({ channelName, updateDrawer }) => {
   const classes = useStyles();
 
   const renderSelectedChannel = () => {
@@ -55,9 +56,9 @@ const Header = ({ channelName, logoutUser, updateDrawer }) => {
             <FontAwesomeIcon
               className={classes.headerIcon}
               color="white"
-              icon={true ? faVolumeUp : faHashtag}
+              icon={false ? faVolumeUp : faHashtag}
             ></FontAwesomeIcon>
-            {channelName}
+            {channelName || "A channel you have never seen before!"}
           </Typography>
         </div>
         <div className={classes.dividerWrapper}>
@@ -65,15 +66,11 @@ const Header = ({ channelName, logoutUser, updateDrawer }) => {
         </div>
         <div className={classes.subHeaderWrapper}>
           <Typography className={classes.subHeaderText} variant="body1">
-            {/* {selectedChannel.description
-              ? truncateString(selectedChannel.description, 12)
-              : "No description"} */}
-              Description
+            Description
           </Typography>
- 
         </div>
       </>
-    ) 
+    );
   };
 
   return (
@@ -81,10 +78,14 @@ const Header = ({ channelName, logoutUser, updateDrawer }) => {
       <AppBar elevation={2} className={classes.appbar} position="static">
         <Toolbar>
           {renderSelectedChannel()}
-          <Button onClick={updateDrawer} color="secondary" >show drawer</Button>
-          {/* <Button onClick={logoutUser} color="secondary" style={{ marginLeft: 'auto'}}>Logout</Button> */}
-          </Toolbar>
-
+          <Button
+            style={{ marginLeft: "auto" }}
+            onClick={updateDrawer}
+            color="secondary"
+          >
+            show drawer
+          </Button>
+        </Toolbar>
       </AppBar>
     </div>
   );

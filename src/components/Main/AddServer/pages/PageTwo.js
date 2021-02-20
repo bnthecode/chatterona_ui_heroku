@@ -1,9 +1,4 @@
-import {
-  DialogTitle,
-  Typography,
-  makeStyles,
-  Paper,
-} from "@material-ui/core";
+import { DialogTitle, Typography, makeStyles, Paper } from "@material-ui/core";
 import {
   faUserFriends,
   faUsers,
@@ -31,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "lightgrey",
     width: "100%",
   },
-
 
   footerText: {
     fontWeight: 600,

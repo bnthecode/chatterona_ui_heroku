@@ -1,13 +1,8 @@
-import {
-  faPlus,
-  faTachometerAlt,
-  faUserFriends,
-} from "@fortawesome/free-solid-svg-icons";
-import { Grid, List, Paper, Typography } from "@material-ui/core";
-import { ChevronLeft, Message, PeopleAlt, Speed } from "@material-ui/icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { List, Paper, Typography } from "@material-ui/core";
+import { PeopleAlt, Speed } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { useState } from "react";
-import channelsHttp from "../../../../http/channels-http";
 import Avatar from "../../../_reusable/Avatar";
 import CollapsableListItem from "../../../_reusable/CollapsableListItem";
 import CreateDirectMessageDialog from "../CreateDirectMessageDialog";
@@ -40,13 +35,12 @@ const ConnectionChannels = ({
   const createDirectMessage = (channel) => {
     createChannel(channel);
     setDirectMessageDialog(false);
-  }
-  return channels.length && (
+  };
+  return (
     <>
       <List className={classes.list}>
         <CollapsableListItem
           style={{ height: 48 }}
-     
           iconLeft={<PeopleAlt style={{ fontSize: 24, marginRight: 16 }} />}
           item={{}}
           title={<span style={{ fontSize: 16 }}>Friends</span>}
@@ -54,17 +48,16 @@ const ConnectionChannels = ({
 
         <CollapsableListItem
           style={{ height: 48 }}
-          iconLeft={<Speed style={{ fontSize: 24, marginRight: 16,}} />}
+          iconLeft={<Speed style={{ fontSize: 24, marginRight: 16 }} />}
           item={{}}
           title={<span style={{ fontSize: 16 }}>Nitro</span>}
         />
         <CollapsableListItem
           onClick={() => {}}
-
           iconRight={{
             icon: faPlus,
             onClick: () => {
-              setDirectMessageDialog(true)
+              setDirectMessageDialog(true);
             },
             title: "Create DM",
           }}
@@ -74,54 +67,58 @@ const ConnectionChannels = ({
         />
         <div style={{ overflow: "auto", maxHeight: "calc(100vh - 290px)" }}>
           {channels && channels.length
-            ? channels.map((message) => message.to || message.from ? (
-                <CollapsableListItem
-                  style={{ height: 48, padding: 0 }}
-                  selected={channelId === message.channelId}
-                  iconLeft={''}
-                  onClick={() => {}}
-                  title="Title"
-                  id="123"
-                  customListItem={
-                    <Paper
-                      elevation={0}
-                      style={{
-                        backgroundColor: "transparent",
-                        height: "100%",
-                        width: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        flexDirection: "row",
-                      }}
-                      onClick={() => {
-                        selectChannel(message.channelId)
-                      }}
-                    >
-                      <Avatar
-                        backgroundURL={
-                          message.to.userId === userId
-                            ? message.from.photoURL
-                            : message.to.photoURL
-                        }
-                        size="xs"
-                      ></Avatar>
-                      <Typography
+            ? channels.map((message) =>
+                message.to || message.from ? (
+                  <CollapsableListItem
+                    style={{ height: 48, padding: 0 }}
+                    selected={channelId === message.channelId}
+                    iconLeft={""}
+                    onClick={() => {}}
+                    title="Title"
+                    id="123"
+                    customListItem={
+                      <Paper
+                        elevation={0}
                         style={{
-                          fontSize: 14,
-                          marginLeft: 8,
-                          fontWeight: 600,
-                          color: "lightgrey",
+                          backgroundColor: "transparent",
+                          height: "100%",
+                          width: "100%",
+                          display: "flex",
+                          alignItems: "center",
+                          flexDirection: "row",
+                        }}
+                        onClick={() => {
+                          selectChannel(message.channelId);
                         }}
                       >
-                        {message.to.userId === userId
-                          ? message.from.username
-                          : message.to.username}
-                      </Typography>
-                    </Paper>
-                  }
-                  primary
-                />
-              ) : <div />)
+                        <Avatar
+                          backgroundURL={
+                            message.to.userId === userId
+                              ? message.from.photoURL
+                              : message.to.photoURL
+                          }
+                          size="xs"
+                        ></Avatar>
+                        <Typography
+                          style={{
+                            fontSize: 14,
+                            marginLeft: 8,
+                            fontWeight: 600,
+                            color: "lightgrey",
+                          }}
+                        >
+                          {message.to.userId === userId
+                            ? message.from.username
+                            : message.to.username}
+                        </Typography>
+                      </Paper>
+                    }
+                    primary
+                  />
+                ) : (
+                  <div />
+                )
+              )
             : ""}
         </div>
         <CreateDirectMessageDialog
@@ -129,10 +126,10 @@ const ConnectionChannels = ({
           friends={friends}
           open={directMessageDialogOpen}
           handleClose={setDirectMessageDialog}
-      />
+        />
       </List>
     </>
   );
 };
 
-export default  ConnectionChannels;
+export default ConnectionChannels;

@@ -1,5 +1,5 @@
 const TextAndImage = () => {
-    return <div>Text And Image</div>
-}
+  return <div>Text And Image</div>;
+};
 
 export default TextAndImage;

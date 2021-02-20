@@ -1,14 +1,11 @@
 import React, { createRef, PureComponent } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
 import Chat from "../../components/Main/Chat";
 import Header from "../../components/Main/Header";
 import ServerUsers from "../../components/Main/Server/ServerUsers";
 import channelsHttp from "../../http/channels-http";
 import serversHttp from "../../http/servers-http";
-
 import { setServerUsersRedux } from "../../redux/actions/appActions";
-
 import withWebsocket from "../../services/HOC's/withWebsocket";
 import PublicServers from "./PublicServers";
 
@@ -28,27 +25,21 @@ class ContentNavigation extends PureComponent {
     websocketJoinChannel(channelId);
     const messages = await channelsHttp.getChannelMessages(channelId);
     this.setState({ messages });
-    // this.handleNewServerSelection(serverId);
-    // set server users
   };
 
   componentDidUpdate = async (prevProps) => {
     const { messages } = this.state;
     const { channelId, websocketEvent } = this.props;
-    if (websocketEvent) {
-      switch (websocketEvent) {
-        case "message": {
-          const {
-            websocketMessage: { message, merge },
-          } = this.props;
+    if (websocketEvent && websocketEvent === "message") {
+      const {
+        websocketMessage: { message, merge },
+      } = this.props;
 
-          const updatedLast = merge
-            ? messages.splice(0, messages.length - 1)
-            : messages;
+      const updatedLast = merge
+        ? messages.splice(0, messages.length - 1)
+        : messages;
 
-          this.setState({ messages: [...updatedLast, message] });
-        }
-      }
+      this.setState({ messages: [...updatedLast, message] });
     }
     if (channelId !== prevProps.channelId) {
       await this.handleNewChannelSelection(channelId);
@@ -56,7 +47,7 @@ class ContentNavigation extends PureComponent {
   };
 
   handleNewChannelSelection = async (channelId) => {
-    const { history, joinChannel: websocketJoinChannel } = this.props;
+    const { joinChannel: websocketJoinChannel } = this.props;
 
     const messages = await channelsHttp.getChannelMessages(channelId);
     this.setState({ messages });
@@ -67,12 +58,6 @@ class ContentNavigation extends PureComponent {
     const { setServerUsers } = this.props;
     const users = await serversHttp.getServerUsers(serverId);
     setServerUsers(users);
-  };
-
-  createChannel = () => {
-    // const { servers, setServers } = this.props;
-    // const newServer = await serversHttp.createServer(server);
-    // setServers([...servers, newServer]);
   };
 
   sendWebsocketMessage = (message, merge) => {
@@ -91,12 +76,20 @@ class ContentNavigation extends PureComponent {
   };
 
   determineContent = (route) => {
-    const { username, channelId, serverName, serverId, websocketTypers } = this.props;
+    const {
+      username,
+      channelId,
+      serverName,
+      serverId,
+      websocketTypers,
+    } = this.props;
     const { messages, userDrawer } = this.state;
     switch (route) {
       case "public-servers": {
         return <PublicServers />;
       }
+      case "whatever-else":
+        break;
       default:
         return (
           <div>

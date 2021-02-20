@@ -1,13 +1,6 @@
-import { makeStyles, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { memo } from "react";
 import { truncateString } from "../../../../utilities/global-utilities";
-
-const useStyles = makeStyles(() => ({
-  userTypings: {
-    width: 400,
-    color: "white",
-  },
-}));
 
 const buildTyperString = (typers) => {
   const end = typers.length > 1 ? "are typing..." : "is typing...";
@@ -16,11 +9,12 @@ const buildTyperString = (typers) => {
     acc = i === 0 ? name : `${name}, ` + acc;
     return acc;
   }, "");
-  return typers.length > 3 ? "Everyone and their mom are typing" : `${string} ${end}`;
+  return typers.length > 3
+    ? "Everyone and their mom are typing"
+    : `${string} ${end}`;
 };
 
 const Typers = ({ websocketTypers = [] }) => {
-  const classes = useStyles();
   return (
     <div
       style={{

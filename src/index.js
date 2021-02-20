@@ -8,8 +8,7 @@ import theme from "./styles/muiTheme";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,7 +1,6 @@
 import Voice from "./Voice";
 
 class WebsocketService extends Voice {
-
   userStream = {};
   connection = new WebSocket("ws://localhost:5000");
   connectedChannelId = "";
@@ -13,7 +12,7 @@ class WebsocketService extends Voice {
     this.connection.onmessage = async (event) => {
       const data = JSON.parse(event.data);
       if (data.type === "create-offer") {
-       await  this.handleWebsocketCreateOffer(data);
+        await this.handleWebsocketCreateOffer(data);
       }
       if (data.type === "create-answer") {
         await this.handleWebsocketOtherPersonAnswered(data);
@@ -39,7 +38,6 @@ class WebsocketService extends Voice {
   };
 
   handleWebsocketCreateOffer = async (data) => {
-
     await this.createRemotePeer(this.channelId, data.offer, this.connection);
     // do i set the track shit here????
   };
@@ -49,18 +47,17 @@ class WebsocketService extends Voice {
   };
 
   joinChannel = (channelId) => {
+    this.connection.send(
+      JSON.stringify({
+        type: "join-channel",
+        channelId,
+      })
+    );
+    this.connectionsOpen = {
+      ...this.connectionsOpen,
+      [channelId]: true,
+    };
 
-      this.connection.send(
-        JSON.stringify({
-          type: "join-channel",
-          channelId,
-        })
-      );
-      this.connectionsOpen = {
-        ...this.connectionsOpen,
-        [channelId]: true,
-      };
-    
     this.connectedChannelId = channelId;
   };
   sendMessage = (channelId, message, merge) => {

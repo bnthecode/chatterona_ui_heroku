@@ -6,7 +6,6 @@ import {
   faPencilAlt,
   faPlusCircle,
   faShieldAlt,
-
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { Checkbox, FormControlLabel, Grow, Paper } from "@material-ui/core";
@@ -41,10 +40,12 @@ const GreenCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox {...props} />);
 
-const HeaderOptions = ({ headerOptions, handleChannelOptionSelect, hideMutedChannels }) => {
+const HeaderOptions = ({
+  headerOptions,
+  handleChannelOptionSelect,
+  hideMutedChannels,
+}) => {
   const classes = useStyles();
- 
-
 
   const listItems = [
     { name: "Server Boost", icon: faGem, break: true },
@@ -59,9 +60,7 @@ const HeaderOptions = ({ headerOptions, handleChannelOptionSelect, hideMutedChan
       name: "Hide Muted Channels",
       customIcon: (
         <FormControlLabel
-          control={
-            <GreenCheckbox checked={hideMutedChannels} />
-          }
+          control={<GreenCheckbox checked={hideMutedChannels} />}
         />
       ),
     },

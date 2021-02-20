@@ -136,7 +136,6 @@ const PageThree = ({ setStep, step, onComplete, username }) => {
 
       <Paper className={classes.uploadWrapper}>
         <Paper elevation={0} className={classes.uploadText}>
-
           <div style={{ display: "grid" }}>
             <button className={classes.btn} id="plus" onClick={upload}>
               <FontAwesomeIcon

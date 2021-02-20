@@ -1,8 +1,4 @@
-import {
-  Button,
-  Typography,
-  makeStyles,
-} from "@material-ui/core";
+import { Button, Typography, makeStyles } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 
@@ -13,9 +9,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     alignItems: "center",
     height: 60,
-    padding: '0 16px 0 16px',
+    padding: "0 16px 0 16px",
     margin: 4,
-    borderRadius: 8
+    borderRadius: 8,
   },
   dialogItemIcon: {
     color: theme.palette.secondary.dark,

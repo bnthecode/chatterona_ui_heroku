@@ -1,15 +1,15 @@
 import { Paper, Typography } from "@material-ui/core";
 import moment from "moment";
 
-const NewDayDivider = ({messages, message, index}) => {
+const NewDayDivider = ({ messages, message, index }) => {
+  const isNewDay = (currentDate, previousDate) => {
+    return !moment(currentDate).isSame(previousDate, "day");
+  };
 
-    const isNewDay = (currentDate, previousDate) => {
-        return !moment(currentDate).isSame(previousDate, "day");
-      };
-
-      const renderNewDate = isNewDay(message.date,
-      messages[index - 1] ? messages[index - 1].date : message.date)
-
+  const renderNewDate = isNewDay(
+    message.date,
+    messages[index - 1] ? messages[index - 1].date : message.date
+  );
 
   return renderNewDate ? (
     <Paper
@@ -40,7 +40,9 @@ const NewDayDivider = ({messages, message, index}) => {
         {moment(message.date).format("MMMM DD, YYYY")}
       </Typography>
     </Paper>
-  ): <div />;
+  ) : (
+    <div />
+  );
 };
 
 export default NewDayDivider;

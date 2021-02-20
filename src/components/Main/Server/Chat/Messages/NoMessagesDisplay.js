@@ -1,22 +1,21 @@
-
 import { Paper, Typography } from "@material-ui/core";
 import { useState } from "react";
 
 const NoMessagesDisplay = () => {
   const [render, setRender] = useState(false);
   setTimeout(() => {
-    setRender(true)
-  }, 1000)
- return render ? (
+    setRender(true);
+  }, 1000);
+  return render ? (
     <Paper
       style={{
         minHeight: 40,
         display: "flex",
         flexDirection: "row",
+        width: "calc(100% - 72px)",
         margin: 12,
         padding: 14,
         backgroundColor: "#3a4146",
-        width: "80%",
       }}
     >
       <Paper
@@ -40,8 +39,8 @@ const NoMessagesDisplay = () => {
         No messages in this channel! Send one to start a conversation.
       </Typography>
     </Paper>
-  ): (
-  <div />
+  ) : (
+    <div />
   );
 };
 

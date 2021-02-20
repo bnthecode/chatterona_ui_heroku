@@ -14,5 +14,5 @@ export const determineChatComponentUpdate = (
 };
 
 export const determineCanScroll = (ref) => {
-    return ref && ref.current ? ref.current : null
-}
+  return ref && ref.current ? ref.current : null;
+};

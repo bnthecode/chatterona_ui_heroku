@@ -27,6 +27,8 @@ const getSizes = (type) => {
       return { height: 42, width: 42 };
     case "lg":
       return { height: 54, width: 54 };
+    default:
+      return { height: 54, width: 54 };
   }
 };
 

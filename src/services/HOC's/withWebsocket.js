@@ -1,4 +1,3 @@
-import { fas } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 
 const withWebsocket = (Component) => {
@@ -13,7 +12,6 @@ const withWebsocket = (Component) => {
     };
 
     componentDidMount = async () => {
-      console.log("waiting on socket connection...");
       await this.establishConnection();
       this.connection.onmessage = (event) => {
         const data = JSON.parse(event.data);
@@ -25,6 +23,8 @@ const withWebsocket = (Component) => {
           case "channel-typer": {
             return this.handleIncomingSocketChannelTyper(username);
           }
+          default:
+            return null;
         }
       };
     };

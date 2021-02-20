@@ -1,4 +1,3 @@
-import { faBullseye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Collapse,
@@ -10,7 +9,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import clsx from "clsx";
-import { truncateString } from "../../utilities/global-utilities";
 
 const useStyles = makeStyles(() => ({
   listItem: {
@@ -36,7 +34,7 @@ const useStyles = makeStyles(() => ({
     "&:hover": {
       color: "#fff",
     },
-    
+
     borderRadius: 6,
     marginBottom: 4,
     fontSize: 12,

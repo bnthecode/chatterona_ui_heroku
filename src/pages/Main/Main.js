@@ -1,9 +1,7 @@
-import { Fade } from "@material-ui/core";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router";
 import ServerList from "../../components/Main/ServerList/ServerList";
-import Header from "../../components/Main/Header";
 import ContentNavigation from "./ContentNavigation";
 import serversHttp from "../../http/servers-http";
 import {
@@ -17,9 +15,8 @@ import ChannelNavigation from "../../components/Main/ChannelNavigation/ChannelNa
 import { withStyles } from "@material-ui/styles";
 import usersHttp from "../../http/users.http";
 import UserSettings from "./UserSettings";
-import ServerUsers from "../../components/Main/Server/ServerUsers";
 
-const styles = (theme) => ({
+const styles = () => ({
   wrapper: {
     position: "relative",
     left: 310,
@@ -29,9 +26,6 @@ const styles = (theme) => ({
 });
 
 class Main extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
   state = {
     selectedItem: null,
     serverId: null,
@@ -45,7 +39,7 @@ class Main extends PureComponent {
     setServers(servers || []);
     setUserFriends(friends);
 
-    this.setState({ selectedItem: "home", route: "home" });
+    this.setState({ selectedItem: "@me", route: "@me" });
     history.push("/@me");
   };
 
@@ -53,7 +47,7 @@ class Main extends PureComponent {
     const { servers, setServers } = this.props;
     const newServer = await serversHttp.createServer(server);
     setServers([...servers, newServer]);
-    this.selectServer(newServer.id);
+    this.handleSelection("server", newServer.id);
   };
 
   selectServer = async (serverId) => {
@@ -63,7 +57,6 @@ class Main extends PureComponent {
     history.push(`/${serverId}`);
   };
 
-
   handleSelection = (selectedItem, id) => {
     const { history } = this.props;
     this.setState({
@@ -72,7 +65,7 @@ class Main extends PureComponent {
       route: selectedItem,
     });
     if (selectedItem === "@me") history.push("/@me");
-    if (selectedItem === 'public-servers') history.push('public-servers');
+    if (selectedItem === "public-servers") history.push("public-servers");
     return id ? this.selectServer(id) : "";
   };
 
@@ -86,7 +79,6 @@ class Main extends PureComponent {
         <Switch>
           <Route exact path="/settings" component={UserSettings} />
           <Route path="/">
-           
             <ServerList
               servers={servers}
               selectedItem={selectedItem}
@@ -103,7 +95,6 @@ class Main extends PureComponent {
             <div className={classes.wrapper}>
               <ContentNavigation route={route} channelId={channelId} />
             </div>
-        
           </Route>
         </Switch>
       </>
