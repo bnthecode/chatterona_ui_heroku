@@ -32,7 +32,7 @@ folder structure
         - UserSettings
             ...
    ---constants   (hard coded values that are persistent through the application)  
-   ---http        (http handlers / config for rest endpoints)
+   ---http        (http handlers / rest endpoints)
    ---images      (static assets)
    ---pages       (main page views, corresponding component folder)
    ---redux       (redux actions, reducers, store)
