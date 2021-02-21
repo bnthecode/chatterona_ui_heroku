@@ -5,7 +5,7 @@ Built using the wonderful React, Material UI, and Redux combination. See [this](
 
 ## Installation
 
-Use the package manager [npm](https://www.npmjs.com/) to install all dependies.
+Use the package manager [npm](https://www.npmjs.com/) to install all dependencies.
 
 ```bash
 cd chatterona_ui
