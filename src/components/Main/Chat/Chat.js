@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import { withStyles } from "@material-ui/styles";
-import channelsHttp from "../../http/channels-http";
-import Messages from "./Server/Chat/Messages/Messages";
-import MessageInput from "./Server/Chat/MessageInput";
-import Typers from "./Server/Chat/Typers";
-import { determineCanScroll } from "../../utilities/component-utilities";
+import channelsHttp from "../../../http/channels-http";
+import Messages from "./Messages/Messages";
+import MessageInput from "../Server/Chat/MessageInput";
+import Typers from "../Server/Chat/Typers";
+import { determineCanScroll } from "../../../utilities/component-utilities";
 
 const styles = () => ({
   "@global": {
