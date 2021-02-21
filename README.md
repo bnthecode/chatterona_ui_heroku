@@ -50,11 +50,11 @@ npm run lint:fix
 
 
 ## For the visual oreiented :)
+![Alt text](/s1.PNG?raw=true "Optional Title")
+![Alt text](/s2.PNG?raw=true "Optional Title")
+![Alt text](/s3.PNG?raw=true "Optional Title")
+![Alt text](/s4.PNG?raw=true "Optional Title")
+![Alt text](/s5.PNG?raw=true "Optional Title")
+![Alt text](/s6.PNG?raw=true "Optional Title")
+![Alt text](/s7.PNG?raw=true "Optional Title")
 
-![Screenshot](s1.png)
-![Screenshot](s2.png)
-![Screenshot](s3.png)
-![Screenshot](s4.png)
-![Screenshot](s5.png)
-![Screenshot](s6.png)
-![Screenshot](s7.png)
