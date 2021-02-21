@@ -50,8 +50,8 @@ npm run lint:fix
 
 
 ## For the visual oriented :)
-![Alt text](/s1.PNG?raw=true "Optional Title")
-![Alt text](/s2.PNG?raw=true "Optional Title")
+![Alt text](/s1.PNG?raw=true "Login")
+![Alt text](/s2.PNG?raw=true "Chat")
 ![Alt text](/s3.PNG?raw=true "Optional Title")
 ![Alt text](/s4.PNG?raw=true "Optional Title")
 ![Alt text](/s5.PNG?raw=true "Optional Title")
