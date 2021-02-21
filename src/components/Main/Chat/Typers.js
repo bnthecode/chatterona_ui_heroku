@@ -1,6 +1,6 @@
 import { Typography } from "@material-ui/core";
 import { memo } from "react";
-import { truncateString } from "../../../../utilities/global-utilities";
+import { truncateString } from "../../../utilities/global-utilities";
 
 const buildTyperString = (typers) => {
   const end = typers.length > 1 ? "are typing..." : "is typing...";

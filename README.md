@@ -48,3 +48,13 @@ folder structure
 npm run lint:fix
 ```
 
+
+## For the visual oreiented :)
+
+![Screenshot](s1.png)
+![Screenshot](s2.png)
+![Screenshot](s3.png)
+![Screenshot](s4.png)
+![Screenshot](s5.png)
+![Screenshot](s6.png)
+![Screenshot](s7.png)

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { makeStyles, TextField } from "@material-ui/core";
 import clsx from "clsx";
 import { memo, useState } from "react";
-import { validateUrl } from "../../../../utilities/global-utilities";
+import { validateUrl } from "../../../utilities/global-utilities";
 
 const useStyles = makeStyles((theme) => ({
   input2: {

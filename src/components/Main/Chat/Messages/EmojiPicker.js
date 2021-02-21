@@ -2,7 +2,7 @@ import React, { memo, useState } from "react";
 import { Paper, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import emojione from "emojione";
-import { peopleEmojis } from "../../../../../constants/emojis";
+import { peopleEmojis } from "../../../../constants/emojis";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Backdrop from "@material-ui/core/Backdrop";

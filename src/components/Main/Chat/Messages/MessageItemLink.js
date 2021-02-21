@@ -5,7 +5,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useState } from "react";
-import { truncateString } from "../../../../../utilities/global-utilities";
+import { truncateString } from "../../../../utilities/global-utilities";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
