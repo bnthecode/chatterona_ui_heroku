@@ -1,6 +1,6 @@
 import React, { createRef, PureComponent } from "react";
 import { connect } from "react-redux";
-import Chat from "../../components/Main/Chat";
+import Chat from "../../components/Main/Chat/Chat";
 import Header from "../../components/Main/Header";
 import ServerUsers from "../../components/Main/Server/ServerUsers";
 import channelsHttp from "../../http/channels-http";
