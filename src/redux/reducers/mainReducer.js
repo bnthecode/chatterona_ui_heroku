@@ -2,6 +2,8 @@ const initialState = {
   servers: [],
   serverId: "",
   channelId: "",
+  channel: {},
+  serverUsers: [],
 };
 
 // this reducer handles state used my <Main />
@@ -24,6 +26,20 @@ const mainReducer = (state = initialState, action) => {
       return {
         ...state,
         channelId: action.payload,
+      };
+    }
+
+    case "SET_CHANNEL": {
+      return {
+        ...state,
+        channel: action.payload,
+      };
+    }
+
+    case "SET_SERVER_USERS" : {
+      return {
+        ...state,
+        serverUsers: action.payload,
       };
     }
 

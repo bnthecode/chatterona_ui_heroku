@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { withStyles } from "@material-ui/styles";
 import channelsHttp from "../../../http/channels-http";
-import Messages from "./Messages/Messages";
+import Messages from "./messages/Messages";
 import MessageInput from "./MessageInput";
 import Typers from "./Typers";
 import { determineCanScroll } from "../../../utilities/component-utilities";

@@ -82,6 +82,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const MessageItem = ({ message }) => {
+  console.log(message)
   const classes = useStyles();
   const components = {
     image: MessageItemImage,
@@ -128,7 +129,7 @@ const MessageItem = ({ message }) => {
         />
         <Paper elevation={0} className={classes.contentWrapper}>
           <Typography className={classes.userText}>
-            {message.author.username}
+            {message.author.username || 'bill'}
             <span className={classes.dateText}>
               {moment(message.date).calendar()}
             </span>

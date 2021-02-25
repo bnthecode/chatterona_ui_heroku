@@ -50,11 +50,11 @@ npm run lint:fix
 
 
 ## For the visual oriented :)
-![Alt text](/s1.PNG?raw=true "Login")
-![Alt text](/s2.PNG?raw=true "Chat")
-![Alt text](/s3.PNG?raw=true "Chat")
-![Alt text](/s4.PNG?raw=true "Chat")
-![Alt text](/s5.PNG?raw=true "Settings")
-![Alt text](/s6.PNG?raw=true "Add users")
-![Alt text](/s7.PNG?raw=true "Create DM")
+![Alt text](/repo-images/s1.PNG?raw=true "Login")
+![Alt text](/repo-images/s2.PNG?raw=true "Chat")
+![Alt text](/repo-images/s3.PNG?raw=true "Chat")
+![Alt text](/repo-images/s4.PNG?raw=true "Chat")
+![Alt text](/repo-images/s5.PNG?raw=true "Settings")
+![Alt text](/repo-images/s6.PNG?raw=true "Add users")
+![Alt text](/repo-images/s7.PNG?raw=true "Create DM")
 

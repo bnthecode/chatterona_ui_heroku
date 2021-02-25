@@ -22,9 +22,9 @@ const channelsHttp = {
     return data;
   },
 
-  getChannelMessages: async (channelId, page = 1, limit = 20) => {
+  getChannelMessages: async (channelId) => {
     const { data } = await http.get(
-      `/channels/${channelId}/messages?page=${page}&limit=${limit}`
+      `/channels/${channelId}/messages`
     );
     return data;
   },

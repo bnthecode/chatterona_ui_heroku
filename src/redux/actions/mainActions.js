@@ -9,3 +9,11 @@ export const setServerIdRedux = (dispatch) => (server) => {
 export const setChannelIdRedux = (dispatch) => (channelId) => {
   dispatch({ type: "SET_CHANNEL_ID", payload: channelId });
 };
+
+export const setChannelRedux = (dispatch) => (channel) => {
+  dispatch({ type: "SET_CHANNEL", payload: channel });
+};
+
+export const setServerUsersRedux = (dispatch) => (serverUsers) => {
+  dispatch({ type: "SET_SERVER_USERS", payload: serverUsers });
+};

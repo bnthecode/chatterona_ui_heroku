@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import AppRouter from "./components/Router";
+import AppRouter from "./components/router/Router";
 
 function App({ userId }) {
   return (

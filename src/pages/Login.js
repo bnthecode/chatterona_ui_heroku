@@ -101,7 +101,7 @@ const Login = ({ setAuthUser, history }) => {
   const [userData, setUserData] = useState({});
 
   const handleInitSignIn = async () => {
-    const updatedUser = { ...config.devUser, userData };
+    const updatedUser = { ...config.devUser, ...userData };
     let user;
     if (tab === "Login") {
       user = await usersHttp.loginUser(updatedUser);
