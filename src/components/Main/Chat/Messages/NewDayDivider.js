@@ -11,7 +11,7 @@ const NewDayDivider = ({ messages, message, index }) => {
     messages[index - 1] ? messages[index - 1].date : message.date
   );
 
-  return renderNewDate ? (
+  return renderNewDate || index === 0 ? (
     <Paper
       elevation={0}
       square

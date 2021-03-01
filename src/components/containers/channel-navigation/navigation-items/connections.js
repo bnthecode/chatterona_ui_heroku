@@ -1,24 +1,31 @@
 import ConnectionChannels from "../../../main/connections/connection-channels/ConnectionChannels";
 
 const ConnectionsChannelNavigation = ({
-  channels,
+  directMessages,
+  createDirectMessage,
   channelId,
   friends,
   userId,
-  selectChannel,
+  selectDirectMessage,
   createChannel,
   handleDirectMessage,
+  selectListItem,
+  match
 }) => {
   return (
-    <ConnectionChannels
-      channels={channels}
-      channelId={channelId}
-      friends={friends}
-      userId={userId}
-      selectChannel={selectChannel}
-      createChannel={createChannel}
-      handleDirectMessage={handleDirectMessage}
-    />
+    <div>
+      <ConnectionChannels
+      createDirectMessage={createDirectMessage}
+        directMessages={directMessages}
+        channelId={channelId}
+        friends={friends}
+        userId={userId}
+        selectDirectMessage={selectDirectMessage}
+        createChannel={createChannel}
+        handleDirectMessage={handleDirectMessage}
+        selectListItem={selectListItem}
+      />
+    </div>
   );
 };
 export default ConnectionsChannelNavigation;

@@ -1,15 +1,16 @@
-import { faUserFriends, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Typography } from "@material-ui/core";
 import { useState } from "react";
 
-const ConnectionContentHeader = () => {
+const ConnectionContentHeader = ({updateHeaderFilter}) => {
   const listItems = ["Online", "All", "Pending", "Blocked"];
   const [selected, setSelected] = useState("Online");
 
 
   const handleTabChange = (tab) => {
       setSelected(tab);
+      updateHeaderFilter(tab);
   }
   return (
     <div

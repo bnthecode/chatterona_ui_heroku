@@ -1,7 +1,7 @@
 import ServerChannels from "../../../main/server/server-channels/ServerChannels";
 
 const ServerChannelNavigation = ({
-  channels,
+  categories,
   channelId,
   friends,
   selectChannel,
@@ -11,7 +11,7 @@ const ServerChannelNavigation = ({
 }) => {
   return (
     <ServerChannels
-      channels={channels}
+      categories={categories}
       channelId={channelId}
       friends={friends}
       selectChannel={selectChannel}

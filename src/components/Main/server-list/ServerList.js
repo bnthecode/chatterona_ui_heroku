@@ -37,6 +37,7 @@ const ServerList = ({
   selectedItem,
   createServer,
   handleSelection,
+  tempServer,
 }) => {
   const [showAddServerDialog, setAddServerDialogOpen] = useState(false);
   const isSelected = (id) => selectedItem === id || serverId === id;
@@ -59,6 +60,20 @@ const ServerList = ({
       >
         <CastConnected style={{ fontSize: 28 }} />
       </ServerListItem>
+      {tempServer ? (
+        <ServerListItem
+          title={tempServer.name}
+          id={tempServer.id}
+          setSelected={() => handleSelection("server", tempServer.id)}
+          selected={isSelected(tempServer.id)}
+          listItemProps={{
+            onClick: () => handleSelection("server", tempServer.id),
+            style: { backgroundImage: `url(${tempServer.photoURL})` },
+          }}
+        />
+      ) : (
+        ""
+      )}
       <Divider className={classes.divider} />
       {servers ? (
         servers.map((svr) => (
@@ -91,7 +106,7 @@ const ServerList = ({
         title="Explore Public Servers"
         id="public-servers"
         setSelected={() => handleSelection("public-servers")}
-        selected={false}
+        selected={selectedItem === "public-servers"}
       >
         <ExploreIcon />
       </ServerListItem>
@@ -99,11 +114,8 @@ const ServerList = ({
       <ServerListItem
         title="Download Apps"
         id="download-apps"
-        setSelected={() => null}
-        selected={false}
-        listItemProps={{
-          onClick: () => {},
-        }}
+        selected={selectedItem === "download-apps"}
+        setSelected={() => handleSelection("download-apps")}
       >
         <DownloadIcon />
       </ServerListItem>

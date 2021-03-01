@@ -128,7 +128,6 @@ const CreateChannelDialog = ({
         InputProps={{
           className: classes.input,
           focused: classes.focused,
-          notchedOutline: classes.notchedOutline,
         }}
         className={classes.muiInput}
         id="server-name"

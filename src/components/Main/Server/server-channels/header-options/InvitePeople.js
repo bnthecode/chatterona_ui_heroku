@@ -189,11 +189,9 @@ const InvitePeople = ({ handleClose, friends, serverName, inviteUsers }) => {
             ),
             className: classes.input,
             focused: classes.focused,
-            notchedOutline: classes.notchedOutline,
           }}
           onChange={searchFriends}
           className={classes.muiInput}
-          id="username"
           variant="outlined"
         ></TextField>
       </Paper>
@@ -233,11 +231,9 @@ const InvitePeople = ({ handleClose, friends, serverName, inviteUsers }) => {
               copied ? classes.copiedTextField : "",
             ]),
             focused: classes.focused,
-            notchedOutline: classes.notchedOutline,
           }}
           onChange={searchFriends}
           className={classes.muiInput}
-          id="username"
           variant="outlined"
         ></TextField>
       </Paper>

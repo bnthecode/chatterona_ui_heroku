@@ -116,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const CreateDirectMessageDialog = ({
   handleClose,
-  createDirectMessage,
+  handleDirectMessage,
   friends,
   open,
 }) => {
@@ -185,11 +185,9 @@ const CreateDirectMessageDialog = ({
             ),
             className: classes.input,
             focused: classes.focused,
-            notchedOutline: classes.notchedOutline,
           }}
           onChange={searchFriends}
           className={classes.muiInput}
-          id="username"
           variant="outlined"
         ></TextField>
       </Paper>
@@ -200,7 +198,7 @@ const CreateDirectMessageDialog = ({
         <Button
           disabled={!addedFriends.length}
           onClick={() => {
-            createDirectMessage({ to: addedFriends[0] });
+            handleDirectMessage({ to: addedFriends[0] });
           }}
           variant="contained"
           color="secondary"

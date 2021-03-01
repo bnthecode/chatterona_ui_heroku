@@ -7,6 +7,7 @@ import serversHttp from "../http/servers-http";
 import {
   setServersRedux,
   setServerIdRedux,
+  setTempServerRedux,
 } from "../redux/actions/mainActions";
 
 import { setUserFriendsRedux } from "../redux/actions/authActions";
@@ -16,6 +17,8 @@ import { withStyles } from "@material-ui/styles";
 import usersHttp from "../http/users.http";
 import UserSettings from "../components/user-settings/UserSettings";
 import HeaderNavigation from "../components/containers/header-navigation/HeaderNavigation";
+import { Paper } from "@material-ui/core";
+import PreviewModal from "../components/main/preview-modal/PreviewModal";
 
 const styles = () => ({
   wrapper: {
@@ -51,45 +54,48 @@ class Main extends PureComponent {
     this.handleSelection("server", newServer.id);
   };
 
+  updateServersList = (servers) => {
+    const { setServers } = this.props;
+    setServers(servers || []);
+  }
+
   selectServer = async (serverId) => {
-    const { setServerId, history } = this.props;
+    const { setServerId } = this.props;
     setServerId(serverId);
     this.setState({ serverId });
-    history.push(`/channels/${serverId}`);
+    // history.push(`/channels/${serverId}`);
   };
 
   handleSelection = (selectedItem, id) => {
-    const { history } = this.props;
+    const { history, tempServer, setTempServer } = this.props;
+    if(tempServer && id !== tempServer.id) {
+      setTempServer(null)
+    }
     this.setState({
       selectedItem: selectedItem,
       serverId: id || null,
       route: selectedItem,
     });
     if (selectedItem === "@me") history.push("/channels/@me");
-    if (selectedItem === "public-servers") history.push("public-servers");
+    if (selectedItem === "public-servers") history.push("/public-servers");
     return id ? this.selectServer(id) : "";
   };
 
-
-  updateSelectedChannel = (channelName) => {
-    // used to pass through other components
-    this.setState({ channelName })
-  }
-
   render() {
     const { route, selectedItem, serverId, channel } = this.state;
-    const { servers, classes, channelId } = this.props;
+    const { servers, classes, channelId, tempServer } = this.props;
     const server = servers.find((svr) => svr.id === serverId) || {};
     const { name: serverName } = server;
     return (
       <>
         <Switch>
           <Route exact path="/settings" component={UserSettings} />
-          <Route path="/channels">
+          <Route path="/">
             <HeaderNavigation channel={channel} route={route} />
             <ServerList
               servers={servers}
               selectedItem={selectedItem}
+              tempServer={tempServer}
               serverId={serverId}
               handleSelection={this.handleSelection}
               createServer={this.createServer}
@@ -99,11 +105,17 @@ class Main extends PureComponent {
               serverName={serverName}
               serverId={serverId}
               route={route}
-              updateSelectedChannel={this.updateSelectedChannel}
             />
 
             <div className={classes.wrapper}>
-              <ContentNavigation route={route} channelId={channelId} />
+              <ContentNavigation
+                servers={servers}
+                handleSelection={this.handleSelection}
+                
+                updateServersList={this.updateServersList}
+                route={route}
+                channelId={channelId}
+              />
             </div>
           </Route>
         </Switch>
@@ -116,12 +128,15 @@ const mapStateToProps = (state) => ({
   servers: state.main.servers,
   serverId: state.main.serverId,
   channelId: state.main.channelId,
+  tempServer: state.main.tempServer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setServers: dispatch(setServersRedux),
   setServerId: dispatch(setServerIdRedux),
   setUserFriends: dispatch(setUserFriendsRedux),
+
+  setTempServer: dispatch(setTempServerRedux),
 });
 
 export default connect(

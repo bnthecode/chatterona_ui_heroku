@@ -73,11 +73,11 @@ const CollapsableListItem = ({
   iconLeft,
   iconRight,
   item,
-  onClick,
   customListItem = false,
   iconLeftProps,
-  selected,
   children,
+  customClass,
+  selectedClass,
   ...props
 }) => {
   const classes = useStyles();
@@ -85,16 +85,16 @@ const CollapsableListItem = ({
   return (
     <div>
       <ListItem
+      id="list-item"
         classes={{
           selected: classes.selected,
         }}
-        className={header ? classes.header : classes.listItem}
+        className={header ? classes.header :clsx([classes.listItem, customClass])}
         disableRipple={true}
-        onClick={onClick}
-        selected={selected}
         dense
         button
         {...props}
+
       >
         <ListItemText
           primary={
@@ -113,10 +113,11 @@ const CollapsableListItem = ({
         />
         {iconRight && (
           <Tooltip placement="right" title={iconRight.title}>
-            <ListItemIcon>
+            <ListItemIcon id="icon-right-icon">
               <FontAwesomeIcon
+              id="icon-right"
                 onClick={(e) => {
-                  e.preventDefault();
+                  e.stopPropagation();
                   iconRight.onClick(item);
                 }}
                 className={clsx([classes.iconRightClass])}

@@ -5,6 +5,9 @@ import { PureComponent } from "react";
 import { withStyles } from "@material-ui/styles";
 import ConnectionsHeader from "./navigation-items/connections";
 import ServerHeader from "./navigation-items/server";
+import { Route, Switch, withRouter } from "react-router";
+import { connect } from "react-redux";
+import { updateHeaderFilterRedux } from "../../../redux/actions/connectionsActions";
 
 const styles = (theme) => ({
   root: {
@@ -15,12 +18,12 @@ const styles = (theme) => ({
     left: 0,
   },
   appbar: {
-    position: 'absolute',
-    width: 'calc(100% - 312px)',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    position: "absolute",
+    width: "calc(100% - 312px)",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
     left: 312,
     height: 46,
   },
@@ -53,39 +56,44 @@ const styles = (theme) => ({
 });
 
 class HeaderNavigation extends PureComponent {
-  hasHeader = (route) => {
-    switch (route) {
-      case "@me":
-        return true;
-      case "server":
-        return true;
-      default:
-        return false;
-    }
-  };
 
-  getHeaderContent = (route) => {
-    switch (route) {
-      case "@me":
-        return <ConnectionsHeader />;
-      case "server":
-        return <ServerHeader />;
-      default:
-        return null;
-    }
-  };
-
+  determineHeaderElevation = () => {
+    const {  history } = this.props;
+    const preventElevationOn = ['public-servers', 'store'];
+   const hideElevation = preventElevationOn.filter((path) => history.location.pathname.includes(path));
+   return hideElevation.length ? 0 : 2;
+  }
   render() {
-    const { route, classes, channel } = this.props;
-    const hasHeader = this.hasHeader(route);
-    return hasHeader ? (
-      <AppBar elevation={2} className={classes.appbar} position="static">
-        <Toolbar>{this.getHeaderContent(route)}</Toolbar>
+    const { classes, updateHeaderFilter, channel } = this.props;
+
+    
+    return (
+      <AppBar elevation={this.determineHeaderElevation()} className={classes.appbar} position="static">
+        <Toolbar>
+
+          <Switch>
+            <Route path={`/channels/@me`}>
+              <ConnectionsHeader updateHeaderFilter={updateHeaderFilter} />
+            </Route>
+            <Route exact path={`/channels/:id`}>
+              <ServerHeader channel={channel} />
+            </Route>
+
+          </Switch>
+        </Toolbar>
       </AppBar>
-    ) : (
-      <div />
     );
   }
 }
+const mapStateToProps = (state) => ({
+  channel: state.main.channel
+})
 
-export default withStyles(styles)(HeaderNavigation);
+const mapDispatchToProps = (dispatch) => ({
+  updateHeaderFilter: dispatch(updateHeaderFilterRedux),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(withRouter(HeaderNavigation)));

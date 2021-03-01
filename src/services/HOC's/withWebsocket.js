@@ -30,6 +30,7 @@ const withWebsocket = (Component) => {
     };
 
     establishConnection = () => {
+      const startTime = performance.now()
       return new Promise((resolve, reject) => {
         let currentAttempt = 0;
         const maxNumberOfAttempts = 10;
@@ -37,15 +38,16 @@ const withWebsocket = (Component) => {
 
         const interval = setInterval(() => {
           if (currentAttempt > maxNumberOfAttempts - 1) {
-            console.log(
-              "trying to connect on retry",
-              currentAttempt,
-              "retrying in intervalTime"
-            );
+            // console.log(
+            //   "trying to connect on retry",
+            //   currentAttempt,
+            //   "retrying in intervalTime"
+            // );
             clearInterval(interval);
             reject(new Error("Maximum number of attempts exceeded"));
           } else if (this.connection.readyState === this.connection.OPEN) {
-            console.log("websocket connection established");
+            const endTime = performance.now()
+            console.log(`%c[WEBSOCKET] took ${endTime - startTime}ms`, "color:DodgerBlue");
             clearInterval(interval);
             resolve();
           }
@@ -54,9 +56,10 @@ const withWebsocket = (Component) => {
       });
     };
 
+
     joinChannel = async (channelId) => {
       await this.establishConnection();
-
+      console.log(`%c[WEBSOCKET] joining channel ${channelId}`, "color:DodgerBlue");
       this.connection.send(
         JSON.stringify({
           type: "join-channel",
@@ -77,6 +80,7 @@ const withWebsocket = (Component) => {
     };
 
     handleIncomingSocketMessage = (message, merge) => {
+      console.log(`%c[WEBSOCKET] incoming message`, "color:DodgerBlue");
       const { websocketTypers } = this.state;
       const prevTypers = websocketTypers.filter(
         (n) => n !== message.author.username
@@ -92,6 +96,7 @@ const withWebsocket = (Component) => {
     };
 
     handleIncomingSocketChannelTyper = (username) => {
+      console.log(`%c[WEBSOCKET] incoming typing`, "color:DodgerBlue");
       const { websocketTypers, currentUsername } = this.state;
       setTimeout(() => {
         this.setState({

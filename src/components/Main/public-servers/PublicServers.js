@@ -1,6 +1,10 @@
 import { withStyles } from "@material-ui/styles";
 import { PureComponent } from "react";
-import { Grow, Slide } from "@material-ui/core";
+import { Grow, Paper, Slide, TextField, Typography } from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
+import PublicServerItem from "./PublicServerItem";
 
 const styles = (theme) => ({
   "@global": {
@@ -57,26 +61,71 @@ class PublicServers extends PureComponent {
 
   render() {
     const { classes } = this.props;
-
+const{ publicServerList, selectPublicServer } = this.props;
     return (
-      <Grow in timeout={500}>
-        <div className={classes.pageContainer}>
+      <div style={{    margin: 12}}>
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            minWidth: 800,
+  
+          }}
+        >
           <div
-            style={{
-              zIndex: 2000,
-              position: "absolute",
-              left: "30%",
-              paddingTop: 70,
-              paddingLeft: 36,
-              width: "calc(70% - 130px)",
-            }}
+            style={{ position: "absolute", top: "25%", textAlign: "center" }}
           >
-            <Slide in direction="left" timeout={1000}>
-              <div></div>
-            </Slide>
+            <Typography
+              style={{ fontWeight: 700, fontSize: 24, color: "white" }}
+            >
+              Find your community on Chatterona
+            </Typography>
+            <Typography
+              style={{ fontWeight: 600, fontSize: 16, color: "white" }}
+            >
+              From gaming, to music, to learning, there's a place for you.
+            </Typography>
+            <TextField
+              placeholder="Explore communities"
+              variant="outlined"
+              InputProps={{
+                style: { height: 42 },
+                endAdornment: (
+                  <FontAwesomeIcon
+                    style={{ cursor: "pointer", color: "grey" }}
+                    icon={faSearch}
+                  />
+                ),
+              }}
+              style={{
+                backgroundColor: "white",
+                marginTop: 16,
+                width: "100%",
+                borderRadius: 8,
+              }}
+            ></TextField>
           </div>
+          <img
+            style={{ width: "100%", maxHeight: 500}}
+            src="https://discord.com/assets/3e0acf6d69894a5d20deb7c513cd1412.svg"
+          />
         </div>
-      </Grow>
+        <Typography style={{ fontSize: 20, marginTop: 16, fontWeight: 600, color: 'white'}}>Featured Communities</Typography>
+        <div
+          style={{
+            display: 'grid',
+            marginTop: 16,
+            gridGap: '16px',
+            gridTemplateColumns: `repeat(auto-fill,minmax(248px,1fr))`
+            
+          }}
+        >
+          {publicServerList.map((server) => (
+            <PublicServerItem selectPublicServer={selectPublicServer} server={server} />
+          ))}
+        </div>
+      </div>
     );
   }
 }

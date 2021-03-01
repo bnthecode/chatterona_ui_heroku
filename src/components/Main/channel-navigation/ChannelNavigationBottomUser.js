@@ -7,7 +7,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { truncateString } from "../../../utilities/global-utilities";
-import ChannelNavigationBottomGame from "./ChannelNavigationBottomGame";
+import Avatar from "../../_reusable/Avatar";
+import ChannelNavigationVoiceConnected from "./ChannelNavigationVoiceConnected";
 
 const useStyles = makeStyles(() => ({
   mainPaper: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#292b2f",
     bottom: 0,
     left: 74,
-    padding: 8,
+    padding: 2,
     display: "flex",
     flexDirection: "column",
   },
@@ -37,16 +38,6 @@ const useStyles = makeStyles(() => ({
     position: "absolute",
     bottom: -2,
     left: 16,
-  },
-  avatar: {
-    minHeight: 30,
-    borderRadius: 15,
-    position: "relative",
-    backgroundSize: "contain",
-    marginLeft: 8,
-    cursor: "pointer",
-    height: 30,
-    width: 30,
   },
   userWrapper: {
     width: "100%",
@@ -61,6 +52,7 @@ const useStyles = makeStyles(() => ({
     maxHeight: "30px",
     minWidth: "30px",
     minHeight: "30px",
+    margin: 2,
   },
   icon: {
     color: "grey",
@@ -72,18 +64,12 @@ const ChannelNavigationBottomUser = ({
   username,
   userPhoto,
   navigateToUserSettings,
+  voiceConnected
 }) => {
   const classes = useStyles();
   return (
     <Paper square className={classes.mainPaper}>
-      <div
-        style={{
-          height: 40,
-          backgroundColor: "#292b2f",
-          width: "100%",
-          borderBottom: "1px solid grey",
-        }}
-      />
+    { voiceConnected ? <ChannelNavigationVoiceConnected /> : '' }
       <Paper className={classes.userSection}>
         <div
           style={{
@@ -92,12 +78,13 @@ const ChannelNavigationBottomUser = ({
             flexDirection: "row",
           }}
         >
-          <Paper
-            style={{ backgroundImage: `url(${userPhoto})` }}
-            className={classes.avatar}
-          >
-            <div className={classes.activeIcon} />
-          </Paper>
+          <Avatar
+          status="Online"
+          size="xs"
+            backgroundURL={userPhoto}
+
+          />
+   
           <div
             style={{
               display: "flex",

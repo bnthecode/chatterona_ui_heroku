@@ -2,6 +2,11 @@ export const setServersRedux = (dispatch) => (servers) => {
   dispatch({ type: "SET_SERVERS", payload: servers });
 };
 
+export const setTempServerRedux = (dispatch) => (server) => {
+  dispatch({ type: "SET_TEMP_SERVER", payload: server });
+};
+
+
 export const setServerIdRedux = (dispatch) => (server) => {
   dispatch({ type: "SET_SERVER_ID", payload: server });
 };

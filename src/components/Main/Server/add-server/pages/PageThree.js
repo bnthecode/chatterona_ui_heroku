@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 40,
   },
 }));
-const PageThree = ({ setStep, step, onComplete, username }) => {
+const PageThree = ({ setStep, step, onComplete, navState, username }) => {
   const classes = useStyles();
   const [serverName, setServerName] = useState("");
   const [serverImg, setServerImg] = useState("");
@@ -123,6 +123,10 @@ const PageThree = ({ setStep, step, onComplete, username }) => {
   const upload = () => {
     document.getElementById("selectImage").click();
   };
+
+  const handleFinish = () => {
+    onComplete({ ...navState, name: serverName, file: serverImg, })
+  }
 
   return (
     <>
@@ -170,7 +174,7 @@ const PageThree = ({ setStep, step, onComplete, username }) => {
           Back
         </Typography>
         <Button
-          onClick={() => onComplete({ name: serverName, file: serverImg })}
+          onClick={() => handleFinish()}
           className={classes.footerButton}
         >
           Create

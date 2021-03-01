@@ -3,7 +3,6 @@ import { List, Paper, Typography } from "@material-ui/core";
 import { PeopleAlt, Speed } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { useState } from "react";
-import ConnectionsHeader from "../../../containers/header-navigation/navigation-items/connections";
 import Avatar from "../../../_reusable/Avatar";
 import CollapsableListItem from "../../../_reusable/CollapsableListItem";
 import CreateDirectMessageDialog from "../CreateDirectMessageDialog";
@@ -23,35 +22,41 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ConnectionChannels = ({
-  channels,
-  selectChannel,
-  createChannel,
+  directMessages,
+  selectDirectMessage,
+  createDirectMessage,
   userId,
-  channelId,
   friends,
+  selectListItem,
 }) => {
   const classes = useStyles();
 
   const [directMessageDialogOpen, setDirectMessageDialog] = useState(false);
+  const [selected, setSelected] = useState("Friends");
 
-  const createDirectMessage = (channel) => {
-    createChannel(channel);
+  const handleDirectMessage = (dm) => {
+    createDirectMessage(dm);
     setDirectMessageDialog(false);
   };
+
   return (
     <>
       <ConnectionChannelHeader />
       <List className={classes.list}>
         <CollapsableListItem
-          style={{ height: 48 }}
+          style={{ height: 42 }}
+          onClick={() => [selectListItem("@me"), setSelected("Friends")]}
+          selected={selected === "Friends"}
           iconLeft={<PeopleAlt style={{ fontSize: 24, marginRight: 16 }} />}
           item={{}}
           title={<span style={{ fontSize: 16 }}>Friends</span>}
         />
 
         <CollapsableListItem
-          style={{ height: 48 }}
+          style={{ height: 42 }}
+          onClick={() => [selectListItem("nitro"), setSelected("Nitro")]}
           iconLeft={<Speed style={{ fontSize: 24, marginRight: 16 }} />}
+          selected={selected === "Nitro"}
           item={{}}
           title={<span style={{ fontSize: 16 }}>Nitro</span>}
         />
@@ -69,12 +74,12 @@ const ConnectionChannels = ({
           header
         />
         <div style={{ overflow: "auto", maxHeight: "calc(100vh - 290px)" }}>
-          {channels && channels.length
-            ? channels.map((message) =>
-                message.to || message.from ? (
+          {directMessages && directMessages.length
+            ? directMessages.map((dm) =>
+            dm.to || dm.from ? (
                   <CollapsableListItem
-                    style={{ height: 48, padding: 0 }}
-                    selected={channelId === message.channelId}
+                    style={{ height: 42, padding: 0 }}
+                    selected={selected === dm.channelId}
                     iconLeft={""}
                     onClick={() => {}}
                     title="Title"
@@ -90,17 +95,21 @@ const ConnectionChannels = ({
                           alignItems: "center",
                           flexDirection: "row",
                         }}
-                        onClick={() => {
-                          selectChannel(message.channelId);
-                        }}
+                        onClick={() => [
+                          selectDirectMessage(dm),
+                          setSelected(dm.channelId),
+                        ]}
                       >
                         <Avatar
                           backgroundURL={
-                            message.to.userId === userId
-                              ? message.from.photoURL
-                              : message.to.photoURL
+                            dm.to.userId === userId
+                              ? dm.from.photoURL
+                              : dm.to.photoURL
                           }
                           size="xs"
+                          status={dm.to.userId === userId
+                            ? dm.from.status
+                            : dm.to.status}
                         ></Avatar>
                         <Typography
                           style={{
@@ -110,13 +119,12 @@ const ConnectionChannels = ({
                             color: "lightgrey",
                           }}
                         >
-                          {message.to.userId === userId
-                            ? message.from.username
-                            : message.to.username}
+                          {dm.to.userId === userId
+                            ? dm.from.username
+                            : dm.to.username}
                         </Typography>
                       </Paper>
                     }
-                    primary
                   />
                 ) : (
                   <div />
@@ -125,7 +133,7 @@ const ConnectionChannels = ({
             : ""}
         </div>
         <CreateDirectMessageDialog
-          createDirectMessage={createDirectMessage}
+          handleDirectMessage={handleDirectMessage}
           friends={friends}
           open={directMessageDialogOpen}
           handleClose={setDirectMessageDialog}

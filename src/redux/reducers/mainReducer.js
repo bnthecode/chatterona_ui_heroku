@@ -2,8 +2,9 @@ const initialState = {
   servers: [],
   serverId: "",
   channelId: "",
-  channel: {},
+  channel: "",
   serverUsers: [],
+  tempServer: null,
 };
 
 // this reducer handles state used my <Main />
@@ -42,6 +43,13 @@ const mainReducer = (state = initialState, action) => {
         serverUsers: action.payload,
       };
     }
+    case "SET_TEMP_SERVER": {
+      return {
+        ...state,
+        tempServer: action.payload,
+      };
+    }
+
 
     default:
       return {

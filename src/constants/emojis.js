@@ -154,3 +154,11 @@ export const peopleEmojis = [
   "🕶",
   "☂️",
 ];
+
+export const emojiMap = {
+  ":)": "😀",
+  ":(": "☹️",
+  ":D": "😃",
+  "XD": "😆",
+  ":P": "😜",
+};

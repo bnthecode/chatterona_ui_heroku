@@ -45,7 +45,7 @@ const useStyles = makeStyles(() => ({
     fontWeight: 700,
   },
   hoverItem: {
-    padding: 2,
+    padding: 4,
     "&:hover": {
       backgroundColor: "rgb(47,49,54, .4)",
     },
@@ -82,7 +82,6 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const MessageItem = ({ message }) => {
-  console.log(message)
   const classes = useStyles();
   const components = {
     image: MessageItemImage,
@@ -106,16 +105,17 @@ const MessageItem = ({ message }) => {
 
     return <Component content={content} />;
   };
-  const [showMsgActions, displayMessageActions] = useState(false);
+  const [showHoverInfo, displayHoverInfo] = useState(false);
   const [emojiPickerOpen, showEmojiPicker] = useState(false);
 
-  const showActions = (i) => {
-    displayMessageActions({ [i]: !showMsgActions[i] });
+  const showHover = (i, date) => {
+    displayHoverInfo({ [i]: !showHoverInfo[i] });
   };
 
   const toggleEmojiPicker = (i) => {
     showEmojiPicker({ [i]: !emojiPickerOpen[i] });
   };
+
   return (
     <div>
       <Paper elevation={0} className={classes.messageWrapper}>
@@ -129,7 +129,7 @@ const MessageItem = ({ message }) => {
         />
         <Paper elevation={0} className={classes.contentWrapper}>
           <Typography className={classes.userText}>
-            {message.author.username || 'bill'}
+            {message.author.username || "bill"}
             <span className={classes.dateText}>
               {moment(message.date).calendar()}
             </span>
@@ -138,13 +138,13 @@ const MessageItem = ({ message }) => {
           {message.content.map((content, i) => (
             <Paper
               key={`${content.name}_${i}`}
-              onMouseEnter={() => showActions(i)}
-              onMouseLeave={() => showActions(i)}
+              onMouseEnter={() => showHover(i, content.date)}
+              onMouseLeave={() => showHover(i, content.date)}
               elevation={0}
               className={classes.chatItem}
             >
               <div className={classes.hoverItem}>
-                {showMsgActions[i] && (
+                {showHoverInfo[i] && (
                   <div className={classes.actionBadge}>
                     <FontAwesomeIcon
                       onClick={() => toggleEmojiPicker(i)}
@@ -160,6 +160,22 @@ const MessageItem = ({ message }) => {
                       icon={faEllipsisH}
                     />
                   </div>
+                )}
+                {showHoverInfo[i] && i !== 0 ? (
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: -52,
+                      top: 4,
+                      color: "grey",
+                      fontWeight: 600,
+                      fontSize: 11,
+                    }}
+                  >
+                    {moment(content.date).format("LT")}
+                  </div>
+                ) : (
+                  ""
                 )}
                 {determineMessageType(content)}
               </div>

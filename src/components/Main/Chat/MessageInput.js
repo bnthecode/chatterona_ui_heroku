@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { makeStyles, TextField } from "@material-ui/core";
 import clsx from "clsx";
 import { memo, useState } from "react";
+import { emojiMap } from "../../../constants/emojis";
 import { validateUrl } from "../../../utilities/global-utilities";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,15 +29,10 @@ const useStyles = makeStyles((theme) => ({
 
   cssFocused: {},
 
-  notchedOutline: {
-    borderWidth: "1px",
-    borderColor: "#40444b !important",
-  },
   input: {
     backgroundColor: "#40444b",
-    width: "calc(100% - 48px)",
+    width: "calc(100% - 16px)",
     position: "absolute",
-    margin: 4,
     bottom: 0,
     borderRadius: 8,
     color: "#dcddde",
@@ -69,6 +65,20 @@ const MessageInput = ({ addMessageToChannel, sendWebsocketChannelTyper }) => {
   const [loader, setLoader] = useState(false);
   const [messageType, setMessageType] = useState("text");
 
+  const parseMessage = (message) => {
+    const emojiRegex = /:-?\)/;
+    const splitMessage = message.split(" ");
+    const emojis = splitMessage
+      .map((msg, i) => ({ msg, replace: emojiRegex.test(msg), i }));
+    const newMessageString = emojis.reduce((acc, item) => {
+      if (item.replace) {
+        acc[item.i] = emojiMap[item.msg];
+      }
+      return acc;
+    }, splitMessage);
+    return newMessageString.join(" ");
+  };
+
   const handleTyping = (value) => {
     const type = validateUrl(value);
     setMessage(value);
@@ -76,9 +86,10 @@ const MessageInput = ({ addMessageToChannel, sendWebsocketChannelTyper }) => {
     if (value.length > 1 && value.length < 3) sendWebsocketChannelTyper();
   };
   const handleSubmit = async () => {
+    const parsedMessage = parseMessage(message);
     setLoader(true);
     setMessage("");
-    await addMessageToChannel(message, messageType);
+    await addMessageToChannel(parsedMessage, messageType);
     setLoader(false);
   };
 
@@ -92,7 +103,6 @@ const MessageInput = ({ addMessageToChannel, sendWebsocketChannelTyper }) => {
               ? clsx([classes.input2, classes.link])
               : classes.input2,
           focused: classes.cssFocused,
-          notchedOutline: classes.notchedOutline,
         },
         startAdornment: (
           <div style={{ display: "grid" }}>

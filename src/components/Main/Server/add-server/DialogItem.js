@@ -30,13 +30,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DialogItem = ({ clickHandler, title, iconLeft, iconRight }) => {
+const DialogItem = ({ clickHandler, title, iconLeft, iconRight, ...props }) => {
   const classes = useStyles();
   return (
     <Button
       onClick={clickHandler}
       className={classes.dialogItem}
       variant="outlined"
+      {...props}
     >
       <FontAwesomeIcon
         className={clsx([classes.dialogItemIcon, classes.flexItemRight])}

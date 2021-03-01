@@ -5,6 +5,7 @@ import Messages from "./messages/Messages";
 import MessageInput from "./MessageInput";
 import Typers from "./Typers";
 import { determineCanScroll } from "../../../utilities/component-utilities";
+import InitialChannelMessage from "./messages/InitialChannelMessage";
 
 const styles = () => ({
   "@global": {
@@ -91,22 +92,14 @@ class Chat extends PureComponent {
       classes,
       websocketTypers,
       messageRef,
-      userDrawer,
       sendWebsocketChannelTyper,
+      channel
     } = this.props;
     return (
-      <div
-        style={{
-          top: 38,
-          height: "calc(100vh - 72px)",
-          position: "relative",
-          transition: "1s width",
-          width: `calc(100% - ${userDrawer ? "240px" : "0px"}`,
-          padding: 8,
-        }}
-      >
+      <div>
         <div className={classes.messageWrapper}>
           <div className={classes.container}>
+            <InitialChannelMessage channel={channel}></InitialChannelMessage>
             <Messages messages={messages} messageRef={messageRef} />
           </div>
         </div>

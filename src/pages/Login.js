@@ -111,7 +111,7 @@ const Login = ({ setAuthUser, history }) => {
     setLoggingIn(true);
     setAuthUser(user);
     setTimeout(async () => {
-      history.push("/@me");
+      history.push("/channels/@me");
     }, 750);
   };
 
@@ -139,6 +139,7 @@ const Login = ({ setAuthUser, history }) => {
         <Paper square className={classes.header}>
           {["Login", "Sign up"].map((item) => (
             <Paper
+              key={item}
               style={{
                 backgroundColor: tab === item ? "#7289da" : "transparent",
                 cursor: "pointer",
@@ -182,7 +183,6 @@ const Login = ({ setAuthUser, history }) => {
                 ),
                 className: classes.input,
                 focused: classes.focused,
-                notchedOutline: classes.notchedOutline,
               }}
               onChange={({ target: { value } }) =>
                 setUserData({ ...userData, username: value })
@@ -200,13 +200,12 @@ const Login = ({ setAuthUser, history }) => {
               InputProps={{
                 className: classes.input,
                 focused: classes.focused,
-                notchedOutline: classes.notchedOutline,
               }}
               onChange={({ target: { value } }) =>
                 setUserData({ ...userData, password: value })
               }
               className={classes.muiInput}
-              id="username"
+              id="password"
               variant="outlined"
             ></TextField>
           </div>

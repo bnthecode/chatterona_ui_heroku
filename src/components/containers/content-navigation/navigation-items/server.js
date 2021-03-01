@@ -1,38 +1,34 @@
 import Chat from "../../../main/chat/Chat";
-import ServerUsers from "../../../main/server/ServerUsers";
 
 const ServerContent = ({
   username,
   messages,
   userDrawer,
   channelId,
+  channel,
   messageRef,
   sendWebsocketChannelTyper,
   sendWebsocketMessage,
   websocketTypers,
-  serverName,
-  serverId,
-  route,
 }) => (
   <div>
-    <div style={{ padding: 8 }}>
       <Chat
         username={username}
         messages={messages}
         userDrawer={userDrawer}
         channelId={channelId}
+        channel={channel}
         messageRef={messageRef}
         sendWebsocketChannelTyper={sendWebsocketChannelTyper}
         sendWebsocketMessage={sendWebsocketMessage}
         websocketTypers={websocketTypers}
       />
-    </div>
-    <ServerUsers
+    {/* <ServerUsers
       userDrawer={userDrawer}
       serverName={serverName}
       serverId={serverId}
       route={route}
-    />
+    /> */}
   </div>
 );
 

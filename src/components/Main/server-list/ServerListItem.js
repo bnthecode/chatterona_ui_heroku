@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   serverListItem: {
-    transition: "all .5s",
+    transition: "all .25s",
     height: 48,
     width: 48,
     minHeight: 40,
@@ -72,7 +72,7 @@ const ServerListItem = ({
   return (
     <div
       style={{ display: "flex", alignItems: "center", position: "relative" }}
-      onClick={() => setSelected(id)}
+      onClick={() => setSelected ? setSelected(id) : null}
     >
       <div style={{ height: 0, ...getSelectedStyles(id) }} />
       <div>

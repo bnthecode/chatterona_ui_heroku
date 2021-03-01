@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 20,
   },
 }));
-const PageTwo = ({ setStep, step }) => {
+const PageTwo = ({ setStep, step, navState, setNavState }) => {
   const classes = useStyles();
   return (
     <>
@@ -48,13 +48,13 @@ const PageTwo = ({ setStep, step }) => {
       </DialogTitle>
       <DialogItem
         title="For a club or community"
-        clickHandler={() => setStep(step + 1)}
+        clickHandler={() =>[setNavState({ ...navState, type: 'public'}), setStep(step + 1)]}
         iconLeft={faUserFriends}
         iconRight={faChevronRight}
       />
       <DialogItem
         title="For me and my friends"
-        clickHandler={() => setStep(step + 1)}
+        clickHandler={() => [setNavState({ ...navState, type: 'private'}), setStep(step + 1)]}
         iconLeft={faUsers}
         iconRight={faChevronRight}
       />

@@ -2,9 +2,9 @@ import { Grid } from "@material-ui/core";
 import { memo } from "react";
 import MessageItem from "./MessageItem";
 import NewDayDivider from "./NewDayDivider";
-import NoMessagesDisplay from "./NoMessagesDisplay";
-const Messages = ({ messages, messageRef }) => {
-  return messages && messages.length ? (
+import InitialChannelMessage from "./InitialChannelMessage";
+const Messages = ({ messages, messageRef, channelName }) => {
+  return (
     <div>
       {messages.map((message, index) => (
         <div key={`${message}_${index}`}>
@@ -20,9 +20,7 @@ const Messages = ({ messages, messageRef }) => {
       ))}
       <div ref={messageRef} />
     </div>
-  ) : (
-    <NoMessagesDisplay />
-  );
+  )
 };
 
 export default memo(Messages);
