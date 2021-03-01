@@ -11,7 +11,7 @@ const ChannelNavigationVoiceConnected = ({
       style={{
         height: 90,
         backgroundColor: "#292b2f",
-        width: "100%",
+        width: "calc(100% - 16px)",
         position: "relative",
         display: "flex",
         borderBottom: "1px solid rgb(128,128,128, .4)",
@@ -42,7 +42,7 @@ const ChannelNavigationVoiceConnected = ({
       </Button>
       <div
         style={{
-          width: "calc(100% - 18px)",
+          width: "100%",
           position: "absolute",
           bottom: 0,
           flexDirection: "row",

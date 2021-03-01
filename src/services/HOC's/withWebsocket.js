@@ -57,7 +57,7 @@ const withWebsocket = (Component) => {
     };
 
 
-    joinServerWebsockets = (servers) => {
+    joinServerWebsockets = async (servers) => {
       await this.establishConnection();
       // updates happening when not in server
       console.log(`%c[WEBSOCKET] sending server id list`, "color:DodgerBlue");
