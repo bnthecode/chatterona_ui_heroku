@@ -57,6 +57,19 @@ const withWebsocket = (Component) => {
     };
 
 
+    joinServerWebsockets = (servers) => {
+      await this.establishConnection();
+      // updates happening when not in server
+      console.log(`%c[WEBSOCKET] sending server id list`, "color:DodgerBlue");
+      this.connection.send(
+        JSON.stringify({
+          type: "join-servers",
+          servers,
+        })
+      );
+    }
+
+
     joinChannel = async (channelId) => {
       await this.establishConnection();
       console.log(`%c[WEBSOCKET] joining channel ${channelId}`, "color:DodgerBlue");
